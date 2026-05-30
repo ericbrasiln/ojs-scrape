@@ -207,3 +207,22 @@
 - Adicionou `site/` ao `.gitignore`.
 - Validou com `uv run --group docs mkdocs build --strict`.
 - Validou `twine check dist/*`.
+
+## Session 9 — 2026-05-30
+
+### Citação, agradecimentos e transparência
+- Adicionou `CITATION.cff` inspirado no padrão do `pyHDB`.
+- Criou página `docs/citation.md` com citação recomendada e BibTeX.
+- Criou página `docs/credits-transparency.md` com:
+  - agradecimento a Ricardo Sodré Andrade;
+  - agradecimento ao LABHDUFBA;
+  - nota sobre uso de IA generativa no desenvolvimento;
+  - finalidade não lucrativa e limites éticos da ferramenta.
+- Atualizou a página inicial da documentação com nota de escopo ético e vínculo institucional.
+- Atualizou o README, usado também como descrição longa no PyPI, com:
+  - escopo ético;
+  - vínculo com o LABHDUFBA;
+  - citação;
+  - agradecimentos;
+  - transparência sobre uso de IA.
+- Incluiu `CITATION.cff` no sdist.

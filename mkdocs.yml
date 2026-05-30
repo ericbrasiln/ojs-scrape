@@ -74,6 +74,8 @@ nav:
       - PDFs: pdfs.md
   - Referência:
       - API Python: api.md
+      - Citação: citation.md
       - Design rationale: design-rationale.md
   - Compatibilidade: compatibility.md
+  - Créditos e transparência: credits-transparency.md
   - Desenvolvimento: development.md

@@ -1,6 +1,11 @@
 # OJS-Scrape
 
-`ojs-scrape` é uma ferramenta de linha de comando em Python para coletar metadados estruturados de periódicos hospedados em OJS.
+`ojs-scrape` é um pacote Python e uma ferramenta de linha de comando para coletar metadados estruturados de periódicos hospedados em OJS.
+
+!!! note "Escopo ético e vínculo institucional"
+    O `ojs-scrape` é desenvolvido sem fins lucrativos e sem pretensão de acessar dados sigilosos, contornar controles de acesso ou alterar informações nos servidores das instituições.
+
+    A ferramenta é produzida no âmbito das pesquisas do [Laboratório de Humanidades Digitais da UFBA (LABHDUFBA)](https://labhdufba.github.io/).
 
 A fonte primária é OAI-PMH.
 Scraping leve com `requests` e BeautifulSoup é usado apenas como complemento para páginas de sumário e PDFs públicos.
@@ -41,3 +46,9 @@ Formulação segura:
 > `ojs-scrape` coleta metadados de periódicos OJS com OAI-PMH público e baixa PDFs públicos quando os artigos usam galleys OJS acessíveis por URL padrão ou detectável.
 
 Para detalhes, consulte [Compatibilidade](compatibility.md).
+
+## Citação, créditos e transparência
+
+Se usar o pacote em pesquisa, ensino, desenvolvimento ou análise institucional, consulte [Citação](citation.md).
+
+Agradecimentos, vínculo com o LABHDUFBA e nota de transparência sobre uso de IA estão em [Créditos e transparência](credits-transparency.md).

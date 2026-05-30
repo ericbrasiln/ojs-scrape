@@ -1,6 +1,12 @@
 # OJS-Scrape
 
-Ferramenta CLI em Python para coleta estruturada de dados de periódicos acadêmicos hospedados em OJS (Open Journal Systems).
+Ferramenta CLI e pacote Python para coleta estruturada de dados de periódicos acadêmicos hospedados em OJS (Open Journal Systems).
+
+## Escopo ético e vínculo institucional
+
+O `ojs-scrape` é desenvolvido sem fins lucrativos e sem pretensão de acessar dados sigilosos, contornar controles de acesso ou alterar informações nos servidores das instituições.
+
+A ferramenta é produzida no âmbito das pesquisas do [Laboratório de Humanidades Digitais da UFBA (LABHDUFBA)](https://labhdufba.github.io/).
 
 ## Decisão metodológica: por que NÃO usar Firecrawl MCP
 
@@ -88,6 +94,28 @@ O processo combinou:
 - validação com Ruff, MyPy, pytest e build via `uv`.
 
 Hermes Agent foi usado como ferramenta de trabalho e automação. As decisões metodológicas e acadêmicas permaneceram sob julgamento humano.
+
+## Citação
+
+Se usar o `ojs-scrape` em pesquisa, ensino, desenvolvimento ou análise institucional, cite o software.
+
+Citação recomendada:
+
+```text
+BRASIL, Eric. OJS-Scrape: coleta de metadados de periódicos OJS via OAI-PMH. Versão 0.1.0. 2026. Software. Disponível em: https://ericbrasil.com.br/ojs-scrape.
+```
+
+O repositório inclui um arquivo [`CITATION.cff`](CITATION.cff) com metadados de citação.
+
+## Agradecimentos e transparência
+
+O projeto agradece a Ricardo Sodré Andrade pela referência intelectual e histórica associada ao Holmes e às experiências de colheita de metadados em periódicos científicos.
+
+Agradece também ao [Laboratório de Humanidades Digitais da UFBA (LABHDUFBA)](https://labhdufba.github.io/) pelo ambiente de pesquisa, interlocução e desenvolvimento metodológico em Humanidades Digitais.
+
+Este pacote e sua documentação foram desenvolvidos com apoio de sistemas de IA generativa, em especial o Hermes Agent, usado como ferramenta de automação, programação assistida, revisão técnica, organização documental e execução de testes.
+
+O uso de IA não substitui julgamento acadêmico, revisão humana ou validação empírica. As decisões sobre método, escopo, interpretação, licenciamento e publicação pertencem ao pesquisador responsável.
 
 Agentes de código que forem usar ou modificar este repositório devem ler [`AGENTS.md`](AGENTS.md).
 
