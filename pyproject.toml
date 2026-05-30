@@ -1,0 +1,46 @@
+[project]
+name = "ojs-scrape"
+version = "0.1.0"
+description = "Ferramenta CLI para coleta de dados estruturados de periódicos OJS via OAI-PMH"
+readme = "README.md"
+license = "GPL-3.0-only"
+requires-python = ">=3.12"
+authors = [
+    { name = "Eric Brasil Nepomuceno", email = "ericbrasil@unilab.edu.br" },
+]
+keywords = ["ojs", "oai-pmh", "harvester", "academic-journals", "bibliographic-data"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+]
+
+dependencies = [
+    "requests>=2.31",
+    "beautifulsoup4>=4.12",
+    "lxml>=5.0",
+]
+
+[project.scripts]
+ojs-scrape = "ojs_scrape.cli:main"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.3",
+]
