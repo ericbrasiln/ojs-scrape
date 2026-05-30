@@ -78,4 +78,6 @@ nav:
       - Design rationale: design-rationale.md
   - Compatibilidade: compatibility.md
   - Créditos e transparência: credits-transparency.md
-  - Desenvolvimento: development.md
+  - Desenvolvimento:
+      - Guia de desenvolvimento: development.md
+      - Roadmap: roadmap.md

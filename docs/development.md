@@ -51,3 +51,9 @@ Publicação:
 - Usar scraping leve apenas como complemento.
 - Transformar falhas reais em testes de regressão.
 - Não versionar saídas de coleta nem PDFs.
+
+## Roadmap e changelog
+
+- O plano público de desenvolvimento fica em [Roadmap](roadmap.md).
+- Mudanças por versão ficam no [`CHANGELOG.md`](https://github.com/ericbrasiln/ojs-scrape/blob/main/CHANGELOG.md) da raiz do repositório.
+- Logs internos de sessão não fazem parte da documentação pública do pacote.
