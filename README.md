@@ -91,6 +91,8 @@ Hermes Agent foi usado como ferramenta de trabalho e automação. As decisões m
 
 Agentes de código que forem usar ou modificar este repositório devem ler [`AGENTS.md`](AGENTS.md).
 
+Para o histórico das decisões metodológicas e arquiteturais, consulte [`docs/design-rationale.md`](docs/design-rationale.md).
+
 ## Instalação para desenvolvimento
 
 ```bash

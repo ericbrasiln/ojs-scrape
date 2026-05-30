@@ -174,4 +174,12 @@
   - CAPTCHA, Cloudflare, bloqueio por IP ou rate limit agressivo;
   - links de PDF quebrados.
 - Recomendou validar PDFs primeiro com `--pdf --pdf-limit N` antes de baixar lotes completos.
-- Espelhou a cautela metodológica em `PROMPT.md` e `findings.md`.
+- Espelhou a cautela metodológica em `docs/design-rationale.md` e `findings.md`.
+
+## Session 7 — 2026-05-30
+
+### Design rationale
+- Moveu o documento original de arquitetura para `docs/design-rationale.md`.
+- Removeu linguagem de bastidor e seções de raciocínio numerado.
+- Preservou as decisões metodológicas e arquiteturais em formato de design rationale.
+- Atualizou referências internas ao documento renomeado.

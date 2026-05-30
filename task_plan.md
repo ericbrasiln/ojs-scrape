@@ -13,7 +13,7 @@ Phase 2 — Protótipo OAI-PMH
 - [x] Documentar por que não usar Firecrawl
 - [x] Investigar referência Holmes/OAI-PMH
 - [x] Definir arquitetura: OAI-PMH primário + scraping complementar
-- [x] Refinar prompt com thread of thought (PROMPT.md — 10 pensamentos)
+- [x] Consolidar decisões de arquitetura em `docs/design-rationale.md`
 - [x] Validar viabilidade testando endpoint OAI-PMH da Afro-Ásia
 - **Status:** complete
 
