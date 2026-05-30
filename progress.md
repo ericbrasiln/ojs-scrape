@@ -183,3 +183,27 @@
 - Removeu linguagem de bastidor e seções de raciocínio numerado.
 - Preservou as decisões metodológicas e arquiteturais em formato de design rationale.
 - Atualizou referências internas ao documento renomeado.
+
+## Session 8 — 2026-05-30
+
+### Documentação com MkDocs Material
+- Configurou MkDocs Material como framework de documentação.
+- Adicionou `mkdocstrings[python]` para referência de API a partir do código.
+- Definiu `site_url` como `https://ericbrasil.com.br/ojs-scrape`.
+- Adicionou `[project.urls]` ao `pyproject.toml`:
+  - Homepage e Documentation: `https://ericbrasil.com.br/ojs-scrape`;
+  - Repository: `https://github.com/ericbrasiln/ojs-scrape`;
+  - Issues: `https://github.com/ericbrasiln/ojs-scrape/issues`.
+- Criou páginas de documentação:
+  - início;
+  - instalação;
+  - uso;
+  - CLI;
+  - PDFs;
+  - API Python;
+  - compatibilidade;
+  - desenvolvimento.
+- Incluiu `mkdocs.yml` e `docs/` no sdist.
+- Adicionou `site/` ao `.gitignore`.
+- Validou com `uv run --group docs mkdocs build --strict`.
+- Validou `twine check dist/*`.

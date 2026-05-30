@@ -104,6 +104,12 @@ uv run pytest -q
 uv build
 ```
 
+Quando a mudança alterar a documentação, rode também:
+
+```bash
+uv run --group docs mkdocs build --strict
+```
+
 Quando a mudança afetar rede, OAI-PMH, TOC ou integração com OJS real, rode também:
 
 ```bash

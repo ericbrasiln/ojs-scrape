@@ -107,6 +107,28 @@ Executar a CLI local:
 uv run ojs-scrape --help
 ```
 
+## Documentação
+
+A documentação pública do projeto será publicada em:
+
+```text
+https://ericbrasil.com.br/ojs-scrape
+```
+
+O site usa MkDocs Material com `mkdocstrings` para gerar referência de API a partir do código.
+
+Servir localmente:
+
+```bash
+uv run --group docs mkdocs serve
+```
+
+Gerar o site estático:
+
+```bash
+uv run --group docs mkdocs build --strict
+```
+
 ## Uso
 
 ```bash

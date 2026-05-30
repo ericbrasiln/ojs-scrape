@@ -29,6 +29,12 @@ dependencies = [
     "requests>=2.31",
 ]
 
+[project.urls]
+Homepage = "https://ericbrasil.com.br/ojs-scrape"
+Documentation = "https://ericbrasil.com.br/ojs-scrape"
+Repository = "https://github.com/ericbrasiln/ojs-scrape"
+Issues = "https://github.com/ericbrasiln/ojs-scrape/issues"
+
 [project.scripts]
 ojs-scrape = "ojs_scrape.cli:main"
 
@@ -39,6 +45,10 @@ dev = [
     "pytest-cov>=7.0.0",
     "ruff>=0.14.6",
     "types-requests>=2.32.4.20250913",
+]
+docs = [
+    "mkdocs-material>=9.6",
+    "mkdocstrings[python]>=0.30",
 ]
 
 [build-system]
@@ -52,8 +62,10 @@ packages = ["src/ojs_scrape"]
 include = [
     "/src",
     "/tests",
+    "/docs",
     "/README.md",
     "/LICENSE",
+    "/mkdocs.yml",
     "/pyproject.toml",
 ]
 
