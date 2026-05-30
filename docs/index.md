@@ -52,3 +52,9 @@ Para detalhes, consulte [Compatibilidade](compatibility.md).
 Se usar o pacote em pesquisa, ensino, desenvolvimento ou análise institucional, consulte [Citação](citation.md).
 
 Agradecimentos, vínculo com o LABHDUFBA e nota de transparência sobre uso de IA estão em [Créditos e transparência](credits-transparency.md).
+
+## Desenvolvimento
+
+O plano público de desenvolvimento está em [Roadmap](roadmap.md).
+
+Mudanças por versão ficam no [`CHANGELOG.md`](https://github.com/ericbrasiln/ojs-scrape/blob/main/CHANGELOG.md) do repositório.

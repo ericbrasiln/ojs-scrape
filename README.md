@@ -116,6 +116,10 @@ Agentes de código que forem usar ou modificar este repositório devem ler [`AGE
 
 Para o histórico das decisões metodológicas e arquiteturais, consulte [`docs/design-rationale.md`](docs/design-rationale.md).
 
+Para próximas etapas públicas do pacote, consulte [`docs/roadmap.md`](docs/roadmap.md).
+
+Para mudanças por versão, consulte [`CHANGELOG.md`](CHANGELOG.md).
+
 ## Instalação para desenvolvimento
 
 ```bash
@@ -132,7 +136,7 @@ uv run ojs-scrape --help
 
 ## Documentação
 
-A documentação pública do projeto será publicada em:
+A documentação pública do projeto está publicada em:
 
 ```text
 https://ericbrasil.com.br/ojs-scrape
