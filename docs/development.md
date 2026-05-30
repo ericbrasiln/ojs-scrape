@@ -45,6 +45,32 @@ Publicação:
 - pull requests validam o build da documentação;
 - pushes em `main` publicam o site no GitHub Pages via `.github/workflows/docs.yml`.
 
+## Publicação de versão
+
+Antes de publicar uma versão:
+
+1. Atualize a versão em `pyproject.toml`.
+2. Atualize a versão em `CITATION.cff`, quando aplicável.
+3. Atualize o [`CHANGELOG.md`](https://github.com/ericbrasiln/ojs-scrape/blob/main/CHANGELOG.md).
+4. Rode o quality gate completo:
+
+   ```bash
+   uv run ruff check .
+   uv run ruff format --check .
+   uv run mypy
+   uv run pytest -q
+   uv run --group docs mkdocs build --strict
+   uv build
+   uvx twine check dist/*
+   ```
+
+5. Teste a instalação limpa do wheel gerado em `dist/`.
+6. Publique primeiro no TestPyPI e teste a instalação a partir dele.
+7. Crie a tag da versão.
+8. Publique no PyPI real.
+
+PyPI não permite reenviar a mesma versão. Se uma versão publicada tiver erro, publique uma nova versão de correção.
+
 ## Regras de método
 
 - Usar OAI-PMH como fonte primária.
