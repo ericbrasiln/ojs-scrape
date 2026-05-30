@@ -33,11 +33,45 @@ O Firecrawl foi testado como método de coleta para a revista Afro-Ásia. Result
 - enriquecer seção, páginas e link de PDF a partir da TOC;
 - baixar PDFs quando solicitado.
 
-Validação com Afro-Ásia: 127 registros no recorte 2024-2025 via OAI-PMH. As edições n. 69, 70 e 71 retornam 104 registros quando cruzadas com suas TOCs.
+Validação com periódicos OJS reais:
 
-Validação com História da Historiografia: 842 artigos exportados na coleta completa; 256 artigos no recorte de publicação 2020-2026. Essa revista revelou dois casos tratados pelo pacote: caracteres de controle inválidos no XML OAI-PMH e diferença entre `datestamp` OAI e data de publicação (`dc:date`).
+- Afro-Ásia: 127 registros no recorte 2024-2025 via OAI-PMH. As edições n. 69, 70 e 71 retornam 104 registros quando cruzadas com suas TOCs.
+- História da Historiografia: 842 artigos exportados na coleta completa; 256 artigos no recorte de publicação 2020-2026. Essa revista revelou dois casos tratados pelo pacote: caracteres de controle inválidos no XML OAI-PMH e diferença entre `datestamp` OAI e data de publicação (`dc:date`).
+- RENBIO: metadados e PDFs públicos validados em lote, com URL pública terminada em `/index` normalizada para o endpoint OAI-PMH correto.
+- Revista Brasileira de Sociologia (RBS): metadados validados; download de PDFs validado por amostragem com `--pdf-limit`, incluindo galleys numéricos e links OJS que precisam ser convertidos de `/article/view/...` para `/article/download/...`.
 
 Observação sobre datas: `--from` e `--until` são interpretados como recorte por data de publicação. O OAI-PMH usa esses parâmetros como `datestamp`; por isso o pacote aplica também filtro local por `dc:date` para evitar que artigos antigos atualizados recentemente entrem no recorte.
+
+## Escopo e limites de compatibilidade
+
+O `ojs-scrape` não promete funcionar com qualquer periódico OJS.
+
+Formulação segura: o pacote coleta metadados de periódicos OJS que exponham OAI-PMH público e baixa PDFs públicos quando os artigos usam galleys OJS acessíveis por URL padrão ou detectável.
+
+Para metadados, a compatibilidade depende de:
+
+- OAI-PMH habilitado e acessível sem autenticação;
+- respostas XML legíveis, mesmo que exijam limpeza de caracteres de controle inválidos;
+- exposição de metadados Dublin Core suficientes (`dc:title`, `dc:creator`, `dc:date`, `dc:identifier`, etc.);
+- ausência de bloqueios por IP, CAPTCHA, Cloudflare ou rate limit agressivo.
+
+Para PDFs, a compatibilidade depende de:
+
+- artigos com PDF disponível;
+- PDFs públicos, sem login ou embargo;
+- galleys OJS acessíveis por links padrão ou detectáveis nas páginas dos artigos;
+- servidor estável o suficiente para downloads sucessivos;
+- links de PDF que não estejam quebrados.
+
+Metadados tendem a ser mais confiáveis do que PDFs. A razão é metodológica: OAI-PMH é um protocolo padronizado para colheita de metadados; já o acesso aos PDFs depende da configuração local de galleys, permissões, tema OJS e plugins de cada revista.
+
+Antes de baixar uma coleção inteira de PDFs, teste uma amostra:
+
+```bash
+ojs-scrape <URL> --from 2024 --until 2025 --pdf --pdf-limit 3 --pdf-dir pdfs_teste/
+```
+
+Se a amostra funcionar, rode o lote completo sem `--pdf-limit`.
 
 ## Processo de desenvolvimento com Hermes Agent
 

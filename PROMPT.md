@@ -131,6 +131,9 @@ ojs-scrape https://periodicos.ufba.br/index.php/afroasia --from 2024 --author "P
 # Com download de PDFs
 ojs-scrape https://periodicos.ufba.br/index.php/afroasia --from 2024 --pdf
 
+# Testar PDFs por amostragem antes de baixar tudo
+ojs-scrape https://periodicos.ufba.br/index.php/afroasia --from 2024 --pdf --pdf-limit 3 --pdf-dir pdfs_teste/
+
 # Formato de saída
 ojs-scrape https://periodicos.ufba.br/index.php/afroasia --from 2024 --format csv
 ojs-scrape https://periodicos.ufba.br/index.php/afroasia --from 2024 --format bibtex
@@ -141,6 +144,10 @@ ojs-scrape https://periodicos.ufba.br/index.php/afroasia --from 2024 -o afro_asi
 
 ## Pensamento 9: O que pode dar errado?
 
+O pacote não deve prometer compatibilidade universal com qualquer revista OJS. A formulação segura é: funciona com periódicos OJS que exponham OAI-PMH público e, para PDFs, com galleys públicos acessíveis por URL padrão ou detectável.
+
+Metadados são mais confiáveis do que PDFs. OAI-PMH é um protocolo padronizado; PDFs dependem da configuração local da revista.
+
 1. **Namespace XML**: O OJS usa namespaces que variam entre versões. Solução: ser flexível no parser, usar `find()` com wildcard se necessário.
 2. **Registros deletados**: OAI-PMH suporta `deletedRecord=persistent`. A Afro-Ásia tem isso. Preciso checar `status="deleted"` nos headers e ignorar.
 3. **Rate limiting do servidor**: Mesmo OAI-PMH, alguns servidores limitam requests. Solução: delay configurável entre requisições.
@@ -148,6 +155,11 @@ ojs-scrape https://periodicos.ufba.br/index.php/afroasia --from 2024 -o afro_asi
 5. **PDFs protegidos**: Alguns periódicos exigem login para PDFs. Solução: detectar (HTTP 401/403) e avisar.
 6. **Encoding**: Periódicos brasileiros podem ter acentos em codificações estranhas. Solução: forçar UTF-8, `requests` já lida com isso.
 7. **ResumptionToken**: Pode expirar se demorar muito entre pages. Solução: se falhar, recomeçar do início da coleção.
+8. **OAI-PMH desabilitado ou bloqueado**: Sem `/oai` público, a coleta de metadados não deve tentar virar scraping pesado. Solução: informar o bloqueio.
+9. **Metadados Dublin Core incompletos**: Algumas revistas não preenchem resumo, palavras-chave, DOI ou páginas. Solução: exportar o que existe e não inventar campos ausentes.
+10. **PDFs ausentes, em embargo ou sem galley padrão**: Nem todo artigo tem PDF público. Solução: registrar falha por artigo e manter metadados.
+11. **Temas/plugins OJS customizados**: Links de galley podem fugir dos padrões conhecidos. Solução: priorizar links oficiais, testar com fixtures e adicionar regressão quando um caso real aparecer.
+12. **Coletas de PDFs são lentas**: Lotes grandes podem demorar e sofrer timeouts. Solução: validar primeiro com `--pdf --pdf-limit N`; só depois rodar o lote completo.
 
 ## Pensamento 10: Resumo da arquitetura final
 

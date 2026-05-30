@@ -27,6 +27,41 @@
 ### Conclusão
 Firecrawl é viável para scraping pontual de poucas páginas. Para coletas sistemáticas de periódicos (>100 artigos), o custo é insustentável no plano free. OAI-PMH é a alternativa correta.
 
+## Escopo de compatibilidade do ojs-scrape
+
+O pacote não deve ser descrito como compatível com qualquer revista OJS.
+
+Formulação segura: `ojs-scrape` coleta metadados de periódicos OJS que exponham OAI-PMH público e baixa PDFs públicos quando os artigos usam galleys OJS acessíveis por URL padrão ou detectável.
+
+### Metadados
+
+O caminho de metadados é o mais confiável, pois usa OAI-PMH. Ainda assim, depende de:
+
+- endpoint `/oai` habilitado e público;
+- respostas XML parseáveis ou recuperáveis após limpeza de caracteres de controle inválidos;
+- metadados Dublin Core suficientes;
+- ausência de bloqueio por login, IP, CAPTCHA, Cloudflare ou rate limit agressivo.
+
+Se o Dublin Core não trouxer resumo, palavras-chave, DOI ou páginas, o pacote deve exportar o campo vazio. Não deve inventar metadados ausentes.
+
+### PDFs
+
+O caminho de PDFs é menos garantido que o de metadados. Depende de:
+
+- artigo ter PDF;
+- PDF estar público, sem login ou embargo;
+- galley OJS usar URL padrão ou detectável;
+- servidor responder de forma estável durante downloads sucessivos;
+- link do PDF não estar quebrado.
+
+Para evitar coletas lentas desnecessárias, validar primeiro com:
+
+```bash
+ojs-scrape <URL> --from 2024 --until 2025 --pdf --pdf-limit 3 --pdf-dir pdfs_teste/
+```
+
+Se a amostra funcionar, rodar o lote completo sem `--pdf-limit`.
+
 ## Validação OAI-PMH — Afro-Ásia (2026-05-30)
 
 ### Teste realizado com sucesso

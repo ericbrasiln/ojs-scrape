@@ -158,3 +158,20 @@
 - `uv run ruff check .` → passou.
 - `uv run mypy` → passou.
 - `uv run pytest -q` → 21 passed, 4 skipped.
+
+## Session 6 — 2026-05-30
+
+### Documentação de escopo e limites
+- Atualizou `README.md` com uma seção explícita de escopo e limites de compatibilidade.
+- Registrou que o pacote não promete funcionar com qualquer revista OJS.
+- Definiu formulação segura: coleta metadados de periódicos OJS com OAI-PMH público e baixa PDFs públicos quando há galleys OJS acessíveis por URL padrão ou detectável.
+- Separou a confiabilidade dos metadados da confiabilidade dos PDFs.
+- Documentou limites conhecidos:
+  - OAI-PMH desabilitado ou bloqueado;
+  - metadados Dublin Core incompletos;
+  - PDFs ausentes, sob login ou embargo;
+  - temas/plugins OJS customizados;
+  - CAPTCHA, Cloudflare, bloqueio por IP ou rate limit agressivo;
+  - links de PDF quebrados.
+- Recomendou validar PDFs primeiro com `--pdf --pdf-limit N` antes de baixar lotes completos.
+- Espelhou a cautela metodológica em `PROMPT.md` e `findings.md`.
