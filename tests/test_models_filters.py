@@ -2,7 +2,12 @@
 
 from __future__ import annotations
 
-from ojs_scrape.filters import filter_by_author, filter_by_date_range, filter_by_issue_ids
+from ojs_scrape.filters import (
+    filter_by_author,
+    filter_by_date_range,
+    filter_by_issue_ids,
+    filter_by_publication_date_range,
+)
 from ojs_scrape.models import Article, OAISet, OJSJournal
 
 
@@ -55,6 +60,23 @@ def test_filter_by_date_range() -> None:
     result = filter_by_date_range(articles, from_year=2024, until_year=2025)
 
     assert [article.title for article in result] == ["A", "B"]
+
+
+def test_filter_by_publication_date_range_uses_dc_date_not_oai_datestamp() -> None:
+    articles = [
+        Article(title="old updated record", datestamp="2024-01-01", dates=["2009-05-29"]),
+        Article(title="inside range", datestamp="2024-01-01", dates=["2021-06-15"]),
+        Article(title="after range", datestamp="2026-01-01", dates=["2026-06-01"]),
+        Article(title="deleted", datestamp="2024-01-01", dates=["2021-01-01"], deleted=True),
+    ]
+
+    result = filter_by_publication_date_range(
+        articles,
+        from_date="2020-01-01",
+        until_date="2026-05-30",
+    )
+
+    assert [article.title for article in result] == ["inside range"]
 
 
 def test_filter_by_issue_ids_enriches_articles() -> None:

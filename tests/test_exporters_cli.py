@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import json
 
-from ojs_scrape.cli import _normalize_date
+from ojs_scrape.cli import _active_article_count, _normalize_date
 from ojs_scrape.exporters import to_bibtex, to_csv, to_json
 from ojs_scrape.models import Article
 
@@ -14,6 +14,12 @@ def test_normalize_date_year_start_and_end() -> None:
     assert _normalize_date("2025", is_until=True) == "2025-12-31"
     assert _normalize_date("2024-03-15") == "2024-03-15"
     assert _normalize_date(None) is None
+
+
+def test_active_article_count_excludes_deleted_records() -> None:
+    articles = [Article(article_id=1), Article(article_id=2, deleted=True)]
+
+    assert _active_article_count(articles) == 1
 
 
 def test_to_json_serializes_unicode() -> None:

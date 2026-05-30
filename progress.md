@@ -66,3 +66,49 @@
 
 ### Observação
 - A revisão independente via `delegate_task` falhou por erro externo de credencial OpenAI (`no-key-required`), problema conhecido da configuração de delegação. A revisão automatizada local foi feita com Ruff, MyPy, pytest, integração real, build e scan estático de segurança.
+
+## Session 3 — 2026-05-30
+
+### Teste com História da Historiografia
+- URL testada: `https://www.historiadahistoriografia.com.br/revista`.
+- Endpoint OAI-PMH válido: `https://www.historiadahistoriografia.com.br/revista/oai`.
+- Repositório identificado como: `História da Historiografia: International Journal of Theory and History of Historiography`.
+- `ListSets` retornou 60 sets.
+
+### Problemas encontrados e corrigidos
+- Algumas respostas OAI-PMH da revista incluem caracteres de controle inválidos em XML 1.0 (`\x02`) dentro de `dc:description`.
+  - Correção: parser remove caracteres proibidos por XML 1.0 antes de chamar `ElementTree`, mantendo warning no log.
+  - Teste de regressão adicionado.
+- O filtro `--from/--until` usava o `datestamp` OAI-PMH como recorte efetivo.
+  - Problema: nessa revista, artigos de 2009 foram atualizados depois de 2020 e apareciam no recorte `--from 2020`.
+  - Correção: CLI agora usa OAI-PMH como pré-filtro e aplica filtro local por `dc:date`, isto é, data de publicação.
+  - Teste de regressão adicionado.
+- A CLI informava a contagem de registros coletados como se fosse a contagem exportada.
+  - Problema: registros OAI-PMH deletados são ignorados pelos exportadores.
+  - Correção: mensagem final distingue artigos exportados e registros deletados ignorados.
+
+### Resultados de validação
+- Coleta completa da História da Historiografia:
+  - 906 registros OAI-PMH coletados;
+  - 842 artigos exportados;
+  - 64 registros deletados ignorados.
+- Recorte `--from 2020 --until 2026-05-30`:
+  - 256 artigos exportados;
+  - distribuição: 2020=43, 2021=34, 2022=47, 2023=40, 2024=42, 2025=30, 2026=20.
+- Múltiplos sets `revista:AR revista:ED` no mesmo recorte:
+  - 26 artigos exportados.
+- Filtro por edição `--issues 55`:
+  - 7 artigos exportados;
+  - `section` preenchida em 7/7;
+  - `pdf_url` preenchida em 7/7.
+- Exportações:
+  - CSV 2020-2026: 256 linhas;
+  - BibTeX 2020-2026: 256 entradas.
+
+### Quality gate
+- `uv run ruff check .` → passou.
+- `uv run ruff format --check .` → passou.
+- `uv run mypy` → passou, 0 issues em 8 source files.
+- `uv run pytest -q` → 15 passed, 4 skipped.
+- `uv run pytest -q --run-integration` → 19 passed.
+- `uv build` → gerou wheel e sdist.

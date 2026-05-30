@@ -35,6 +35,10 @@ O Firecrawl foi testado como método de coleta para a revista Afro-Ásia. Result
 
 Validação com Afro-Ásia: 127 registros no recorte 2024-2025 via OAI-PMH. As edições n. 69, 70 e 71 retornam 104 registros quando cruzadas com suas TOCs.
 
+Validação com História da Historiografia: 842 artigos exportados na coleta completa; 256 artigos no recorte de publicação 2020-2026. Essa revista revelou dois casos tratados pelo pacote: caracteres de controle inválidos no XML OAI-PMH e diferença entre `datestamp` OAI e data de publicação (`dc:date`).
+
+Observação sobre datas: `--from` e `--until` são interpretados como recorte por data de publicação. O OAI-PMH usa esses parâmetros como `datestamp`; por isso o pacote aplica também filtro local por `dc:date` para evitar que artigos antigos atualizados recentemente entrem no recorte.
+
 ## Instalação para desenvolvimento
 
 ```bash

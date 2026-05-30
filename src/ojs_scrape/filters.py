@@ -75,9 +75,46 @@ def filter_by_date_range(
     return results
 
 
+def filter_by_publication_date_range(
+    articles: Sequence[Article],
+    from_date: str | None = None,
+    until_date: str | None = None,
+) -> list[Article]:
+    """Filtra artigos por data de publicação (`dc:date`), não por datestamp OAI."""
+    from_key = _date_key(from_date)
+    until_key = _date_key(until_date)
+    results: list[Article] = []
+
+    for article in articles:
+        if article.deleted or not article.dates:
+            continue
+        publication_key = _date_key(article.dates[0])
+        if publication_key is None:
+            continue
+        if from_key is not None and publication_key < from_key:
+            continue
+        if until_key is not None and publication_key > until_key:
+            continue
+        results.append(article)
+
+    return results
+
+
 def _year_from_date(value: str) -> int | None:
     match = re.search(r"(\d{4})", value)
     return int(match.group(1)) if match else None
+
+
+def _date_key(value: str | None) -> tuple[int, int, int] | None:
+    if not value:
+        return None
+    match = re.search(r"(\d{4})(?:-(\d{2}))?(?:-(\d{2}))?", value)
+    if match is None:
+        return None
+    year = int(match.group(1))
+    month = int(match.group(2) or "1")
+    day = int(match.group(3) or "1")
+    return (year, month, day)
 
 
 def _enrich_article_from_issue_metadata(article: Article, metadata: IssueArticleMetadata) -> None:

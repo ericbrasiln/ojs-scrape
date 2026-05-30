@@ -25,6 +25,7 @@ USER_AGENT = f"ojs-scrape/{__version__} (+https://github.com/ericbrasil/ojs-scra
 DOI_RE = re.compile(r"10\.\d{4,9}/\S+", re.IGNORECASE)
 PAGES_RE = re.compile(r"(?<!\d)(\d+\s*[-\u2013\u2014]\s*\d+)(?!\d)")
 ARTICLE_ID_RE = re.compile(r"article/(\d+)")
+INVALID_XML_CHAR_RE = re.compile(r"[\x00-\x08\x0B\x0C\x0E-\x1F]")
 
 
 class OAIPMHError(Exception):
@@ -83,11 +84,7 @@ class OAIPMHClient:
         response.raise_for_status()
         self._last_request_at = time.monotonic()
 
-        try:
-            root = ET.fromstring(response.content)
-        except ET.ParseError as exc:
-            msg = f"Resposta XML inválida de {response.url}: {exc}"
-            raise OAIPMHParseError(msg) from exc
+        root = _parse_xml_content(response.content, response.url)
 
         error_elem = root.find("oai:error", NS)
         if error_elem is not None:
@@ -275,6 +272,34 @@ def _record_params(
     if set_spec:
         params["set"] = set_spec
     return params
+
+
+def _parse_xml_content(content: bytes, source_url: str) -> ET.Element:
+    """Interpreta XML OAI-PMH, removendo caracteres proibidos por XML 1.0.
+
+    Alguns OJS antigos expõem caracteres de controle dentro de campos Dublin Core.
+    O exemplo observado na História da Historiografia foi ``\\x02`` em
+    ``dc:description``. Esses caracteres tornam o XML inválido, embora o resto da
+    resposta seja aproveitável.
+    """
+    try:
+        return ET.fromstring(content)
+    except ET.ParseError as original_error:
+        text = content.decode("utf-8", errors="replace")
+        cleaned = INVALID_XML_CHAR_RE.sub("", text)
+        if cleaned != text:
+            try:
+                logger.warning(
+                    "Resposta OAI-PMH continha caracteres de controle XML inválidos; "
+                    "eles foram removidos antes do parse: %s",
+                    source_url,
+                )
+                return ET.fromstring(cleaned.encode("utf-8"))
+            except ET.ParseError:
+                pass
+
+        msg = f"Resposta XML inválida de {source_url}: {original_error}"
+        raise OAIPMHParseError(msg) from original_error
 
 
 def _text(parent: ET.Element | None, tag: str) -> str:

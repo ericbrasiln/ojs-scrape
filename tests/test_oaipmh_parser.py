@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import xml.etree.ElementTree as ET
 
-from ojs_scrape.oaipmh import OAIPMHClient
+from ojs_scrape.oaipmh import OAIPMHClient, _parse_xml_content
 
 SAMPLE_RECORD = """\
 <record xmlns="http://www.openarchives.org/OAI/2.0/">
@@ -48,3 +48,21 @@ def test_parse_record_extracts_dc_and_derived_fields() -> None:
     assert article.pages == "8-53"
     assert article.set_specs == ["afroasia:ART"]
     assert article.url.endswith("/article/view/56443")
+
+
+def test_parse_xml_content_removes_invalid_xml_control_characters() -> None:
+    xml = b"""\
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/">
+  <ListRecords>
+    <record>
+      <metadata>
+        <description>meta\x02epistemica</description>
+      </metadata>
+    </record>
+  </ListRecords>
+</OAI-PMH>
+"""
+
+    root = _parse_xml_content(xml, "https://example.test/oai")
+
+    assert "metaepistemica" in "".join(root.itertext())

@@ -8,7 +8,7 @@ import sys
 from collections.abc import Sequence
 
 from .exporters import to_bibtex, to_csv, to_json
-from .filters import filter_by_author, filter_by_issue_ids
+from .filters import filter_by_author, filter_by_issue_ids, filter_by_publication_date_range
 from .models import Article
 from .oaipmh import OAIPMHClient
 from .pdf import download_pdfs
@@ -84,9 +84,17 @@ def main(args: Sequence[str] | None = None) -> int:
         articles = _collect_articles(
             client=client,
             from_date=from_date,
-            until_date=until_date,
+            until_date=None,
             set_specs=opts.set_specs,
         )
+
+    if from_date or until_date:
+        articles = filter_by_publication_date_range(
+            articles,
+            from_date=from_date,
+            until_date=until_date,
+        )
+        logger.info("Após filtro por data de publicação: %s artigos", len(articles))
 
     if opts.issues:
         articles = _filter_by_issues(
@@ -106,7 +114,17 @@ def main(args: Sequence[str] | None = None) -> int:
 
     output_path = opts.output or f"ojs_scrape_output.{opts.output_format}"
     _export(articles, output_path, opts.output_format)
-    logger.info("Saída: %s (%s artigos)", output_path, len(articles))
+    exported_count = _active_article_count(articles)
+    deleted_count = len(articles) - exported_count
+    if deleted_count:
+        logger.info(
+            "Saída: %s (%s artigos exportados; %s registros deletados ignorados)",
+            output_path,
+            exported_count,
+            deleted_count,
+        )
+    else:
+        logger.info("Saída: %s (%s artigos)", output_path, exported_count)
     return 0
 
 
@@ -191,6 +209,11 @@ def _normalize_date(date_str: str | None, *, is_until: bool = False) -> str | No
     if date_str and len(date_str) == 4 and date_str.isdigit():
         return f"{date_str}-12-31" if is_until else f"{date_str}-01-01"
     return date_str
+
+
+def _active_article_count(articles: Sequence[Article]) -> int:
+    """Conta registros que serão exportados, excluindo deletados no OAI-PMH."""
+    return sum(1 for article in articles if not article.deleted)
 
 
 if __name__ == "__main__":
