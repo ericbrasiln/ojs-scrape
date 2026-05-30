@@ -32,6 +32,13 @@ SAMPLE_RECORD = """\
 """
 
 
+def test_client_normalizes_ojs_index_urls() -> None:
+    client = OAIPMHClient("https://renbio.org.br/index.php/sbenbio/index", delay=0)
+
+    assert client.base_url == "https://renbio.org.br/index.php/sbenbio"
+    assert client.oai_url == "https://renbio.org.br/index.php/sbenbio/oai"
+
+
 def test_parse_record_extracts_dc_and_derived_fields() -> None:
     client = OAIPMHClient("https://periodicos.ufba.br/index.php/afroasia", delay=0)
     record = ET.fromstring(SAMPLE_RECORD)

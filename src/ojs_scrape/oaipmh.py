@@ -52,7 +52,7 @@ class OAIPMHClient:
             delay: intervalo mínimo entre requisições ao mesmo servidor.
             timeout: timeout de rede em segundos.
         """
-        normalized = base_url.rstrip("/")
+        normalized = base_url.rstrip("/").removesuffix("/index")
         if normalized.endswith("/oai"):
             self.oai_url = normalized
             self.base_url = normalized.removesuffix("/oai")

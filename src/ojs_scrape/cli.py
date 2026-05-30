@@ -37,6 +37,11 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--pdf", action="store_true", help="Baixar PDFs dos artigos")
     parser.add_argument("--pdf-dir", default="pdfs", help="Diretório para PDFs (default: pdfs/)")
     parser.add_argument(
+        "--pdf-limit",
+        type=int,
+        help="Baixar no máximo N PDFs; útil para testar se o download funciona",
+    )
+    parser.add_argument(
         "--format",
         dest="output_format",
         choices=["json", "csv", "bibtex"],
@@ -109,8 +114,13 @@ def main(args: Sequence[str] | None = None) -> int:
         logger.info("Após filtro por autor %r: %s artigos", opts.author, len(articles))
 
     if opts.pdf:
-        downloaded = download_pdfs(articles, opts.pdf_dir, timeout=opts.timeout)
-        logger.info("PDFs baixados: %s", len(downloaded))
+        downloaded = download_pdfs(
+            articles, opts.pdf_dir, timeout=opts.timeout, limit=opts.pdf_limit
+        )
+        if opts.pdf_limit is not None:
+            logger.info("PDFs baixados: %s/%s amostrados", len(downloaded), opts.pdf_limit)
+        else:
+            logger.info("PDFs baixados: %s", len(downloaded))
 
     output_path = opts.output or f"ojs_scrape_output.{opts.output_format}"
     _export(articles, output_path, opts.output_format)

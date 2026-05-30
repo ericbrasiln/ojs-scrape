@@ -129,3 +129,32 @@
   - convenções de Git (`main`, nunca `master`).
 - Atualizou `README.md` com seção sobre o processo de desenvolvimento com Hermes Agent.
 - Explicitou que Hermes Agent foi usado como ferramenta de trabalho e automação, não como fonte de autoridade acadêmica.
+
+## Session 5 — 2026-05-30
+
+### Amostragem de download de PDFs
+- Adicionou opção CLI `--pdf-limit N`.
+- Uso: `--pdf --pdf-limit 3 --pdf-dir pdfs_teste/`.
+- Objetivo: testar se o download de PDFs funciona sem baixar uma coleção inteira.
+- `download_pdfs()` agora aceita `limit: int | None`.
+- A CLI informa `PDFs baixados: X/N amostrados` quando o limite é usado.
+- Corrigiu suporte a URLs OJS terminadas em `/index`.
+- Corrigiu detecção de PDF para galleys OJS:
+  - `/article/view/{id}/{galley}` → `/article/download/{id}/{galley}`;
+  - galleys textuais como `pdf_53`;
+  - galleys com faixas como `759-775`.
+- Priorizou links de galley OJS sobre PDFs externos citados em referências.
+
+### Validação real
+- Comando real na RBS:
+  - `--from 2026 --until 2026-05-30 --pdf --pdf-limit 2`.
+- Resultado:
+  - 9 artigos no JSON;
+  - 2 PDFs baixados;
+  - arquivos: `966.pdf`, `1007.pdf`;
+  - total baixado: 735816 bytes.
+
+### Quality gate
+- `uv run ruff check .` → passou.
+- `uv run mypy` → passou.
+- `uv run pytest -q` → 21 passed, 4 skipped.

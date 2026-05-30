@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import json
 
-from ojs_scrape.cli import _active_article_count, _normalize_date
+from ojs_scrape.cli import _active_article_count, _normalize_date, build_parser
 from ojs_scrape.exporters import to_bibtex, to_csv, to_json
 from ojs_scrape.models import Article
 
@@ -20,6 +20,13 @@ def test_active_article_count_excludes_deleted_records() -> None:
     articles = [Article(article_id=1), Article(article_id=2, deleted=True)]
 
     assert _active_article_count(articles) == 1
+
+
+def test_parser_accepts_pdf_limit_option() -> None:
+    opts = build_parser().parse_args(["https://example.org/journal", "--pdf", "--pdf-limit", "3"])
+
+    assert opts.pdf is True
+    assert opts.pdf_limit == 3
 
 
 def test_to_json_serializes_unicode() -> None:

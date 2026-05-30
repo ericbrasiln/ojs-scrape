@@ -80,6 +80,18 @@ uv run ojs-scrape "https://periodicos.ufba.br/index.php/afroasia" \
   -o output.json
 ```
 
+Testar download de poucos PDFs:
+
+```bash
+uv run ojs-scrape "https://periodicos.ufba.br/index.php/afroasia" \
+  --from 2024 \
+  --until 2025 \
+  --pdf \
+  --pdf-limit 3 \
+  --pdf-dir pdfs_teste/ \
+  -o output.json
+```
+
 ## Quality gate obrigatório
 
 Antes de declarar uma mudança concluída, rode:

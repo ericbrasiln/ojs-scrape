@@ -103,6 +103,9 @@ ojs-scrape <URL> --from 2024 --until 2025 --format bibtex -o dados.bib
 
 # Baixar PDFs junto com metadados
 ojs-scrape <URL> --from 2024 --until 2025 --pdf --pdf-dir pdfs/
+
+# Testar rapidamente se o download de PDFs funciona sem baixar tudo
+ojs-scrape <URL> --from 2024 --until 2025 --pdf --pdf-limit 3 --pdf-dir pdfs_teste/
 ```
 
 ## Estrutura
