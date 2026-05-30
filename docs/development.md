@@ -40,6 +40,11 @@ Build estrito:
 uv run --group docs mkdocs build --strict
 ```
 
+Publicação:
+
+- pull requests validam o build da documentação;
+- pushes em `main` publicam o site no GitHub Pages via `.github/workflows/docs.yml`.
+
 ## Regras de método
 
 - Usar OAI-PMH como fonte primária.

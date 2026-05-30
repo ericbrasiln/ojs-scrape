@@ -225,3 +225,12 @@
   - agradecimentos;
   - transparência sobre uso de IA.
 - Incluiu `CITATION.cff` no sdist.
+
+## Session 10 — 2026-05-30
+
+### Publicação da documentação
+- Criou workflow `.github/workflows/docs.yml`.
+- Em pull requests, o workflow valida `uv run mkdocs build --strict` sem publicar.
+- Em pushes para `main`, o workflow gera o site e publica no GitHub Pages.
+- Manteve `site_url` em `https://ericbrasil.com.br/ojs-scrape`, conforme uso atual do domínio nos sites do usuário.
+- Atualizou README e documentação de desenvolvimento com a regra de publicação.

@@ -152,6 +152,9 @@ Gerar o site estático:
 uv run --group docs mkdocs build --strict
 ```
 
+A publicação da documentação é feita por GitHub Actions em pushes para `main`, usando GitHub Pages.
+Pull requests validam o build da documentação sem publicar.
+
 ## Uso
 
 ```bash
