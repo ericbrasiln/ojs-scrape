@@ -44,7 +44,5 @@ uv run --group docs mkdocs build --strict
 
 - Usar OAI-PMH como fonte primária.
 - Usar scraping leve apenas como complemento.
-- Não usar Firecrawl para coleta sistemática de metadados OJS.
-- Não usar Selenium ou navegador headless para dados já expostos por OAI-PMH.
 - Transformar falhas reais em testes de regressão.
 - Não versionar saídas de coleta nem PDFs.

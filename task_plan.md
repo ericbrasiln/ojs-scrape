@@ -8,9 +8,7 @@ Phase 2 — Protótipo OAI-PMH
 
 ## Phases
 
-### Phase 1: Prompt Refinement & Arquitetura
-- [x] Analisar limitações do Firecrawl MCP (créditos, rate limiting)
-- [x] Documentar por que não usar Firecrawl
+### Phase 1: Arquitetura
 - [x] Investigar referência Holmes/OAI-PMH
 - [x] Definir arquitetura: OAI-PMH primário + scraping complementar
 - [x] Consolidar decisões de arquitetura em `docs/design-rationale.md`
@@ -55,8 +53,7 @@ Phase 2 — Protótipo OAI-PMH
 ## Decisions Made
 | Decision | Rationale |
 |----------|-----------|
-| Abandonar Firecrawl MCP | Plano free = 1000 credits/mês; `extract` consome ~41 credits/artigo; insustentável para coletas sistemáticas |
-| OAI-PMH como fonte primária | Protocolo padrão do OJS, gratuito, sem rate limiting, suporta recorte temporal e sets |
+| OAI-PMH como fonte primária | Protocolo padrão do OJS, gratuito, suporta recorte temporal e sets |
 | Scraping leve como complemento | Para dados não disponíveis via OAI-PMH (PDFs, capas, etc.); usar requests+BS4, sem headless browser |
 | CLI com argparse | Simples, sem dependências extras; evoluir para click se necessário |
 | Busca por autores local (não no servidor) | OAI-PMH não suporta busca por autor; filtrar no cliente via Dublin Core creator |
@@ -65,11 +62,8 @@ Phase 2 — Protótipo OAI-PMH
 | Licença GPL v3 | Diálogo com a tradição do PKP OHS (GPL v2); software livre forte para projeto acadêmico de dados abertos |
 
 ## Errors Encountered
-| Error | Attempt | Resolution |
-|-------|---------|------------|
-| Firecrawl credits esgotados (1 restante de 1000) | 1 | Abandonar Firecrawl; usar OAI-PMH |
-| Firecrawl `map` retorna 1 link em páginas OJS | 1 | OJS requer JS rendering para links; `map` não funciona |
-| Firecrawl `extract` alucina keywords do Expediente | 1 | Filtrar Expediente por título; usar OAI-PMH que não tem esse problema |
+
+Nenhum erro histórico mantido neste plano.
 
 ## Notes
 - Atualizar status das fases conforme progresso

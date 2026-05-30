@@ -8,16 +8,11 @@ O `ojs-scrape` é desenvolvido sem fins lucrativos e sem pretensão de acessar d
 
 A ferramenta é produzida no âmbito das pesquisas do [Laboratório de Humanidades Digitais da UFBA (LABHDUFBA)](https://labhdufba.github.io/).
 
-## Decisão metodológica: por que NÃO usar Firecrawl MCP
+## Decisão metodológica
 
-O Firecrawl foi testado como método de coleta para a revista Afro-Ásia. Resultado:
+O `ojs-scrape` usa **OAI-PMH** como fonte primária para metadados.
 
-- `extract`: ~41 créditos/artigo. O plano free de 1000 créditos/mês esgota em ~24 artigos.
-- `scrape`: ~1 crédito/página. Funciona, mas é desnecessário para metadados já disponíveis via OAI-PMH.
-- `map`: não mapeou bem páginas OJS.
-- Dependência de API key e serviço comercial para dados acadêmicos já expostos por protocolo aberto.
-
-**Decisão**: usar **OAI-PMH** como fonte primária. Usar scraping apenas como complemento leve para dados não cobertos pelo protocolo, como mapeamento artigo → edição e links de PDF.
+O scraping leve entra apenas como complemento para dados que o protocolo não cobre diretamente, como mapeamento artigo → edição e links de PDF.
 
 ## Método
 
@@ -86,7 +81,7 @@ Este pacote foi desenvolvido com apoio do [Hermes Agent](https://github.com/Nous
 O processo combinou:
 
 - validação empírica de endpoints OAI-PMH reais;
-- comparação entre Firecrawl e protocolo aberto;
+- definição de OAI-PMH como fonte primária;
 - implementação incremental da CLI;
 - testes com revistas concretas, sobretudo Afro-Ásia e História da Historiografia;
 - transformação de falhas reais em testes de regressão;
@@ -208,7 +203,7 @@ src/ojs_scrape/
 └── py.typed      # Marcador PEP 561
 ```
 
-Dependências de runtime: `requests`, `beautifulsoup4`. Sem API keys. Sem Firecrawl. Sem Selenium.
+Dependências de runtime: `requests`, `beautifulsoup4`. Sem API keys. Sem Selenium.
 
 ## Qualidade de código
 

@@ -35,7 +35,7 @@ ojs-scrape "https://periodicos.ufba.br/index.php/afroasia" \
 OJS já expõe metadados por OAI-PMH.
 Esse protocolo é gratuito, padronizado e feito para colheita de metadados.
 
-Por isso, o pacote não usa Firecrawl, Selenium ou navegador headless para dados que já estão disponíveis via OAI-PMH.
+Por isso, o pacote usa OAI-PMH como fonte primária e restringe o scraping leve aos dados complementares que não aparecem no protocolo.
 
 ## Compatibilidade
 

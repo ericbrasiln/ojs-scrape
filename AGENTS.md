@@ -10,13 +10,7 @@ Fonte primária: OAI-PMH.
 
 Complemento permitido: scraping leve de TOC com `requests` + BeautifulSoup para mapear artigo → edição, seção, páginas e PDF.
 
-Não use Firecrawl, Selenium ou navegador headless para metadados que já existem via OAI-PMH.
-
 ## Contexto metodológico
-
-Este pacote nasceu de uma comparação entre scraping comercial e protocolo aberto.
-
-Firecrawl foi testado e descartado para coleta sistemática de OJS porque consome créditos e duplica dados já expostos pelo OAI-PMH.
 
 A decisão metodológica central é: primeiro usar protocolos abertos; só complementar com scraping leve quando o OAI-PMH não traz o dado.
 

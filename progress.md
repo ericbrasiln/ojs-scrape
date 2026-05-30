@@ -3,7 +3,6 @@
 ## Session 1 — 2026-05-30
 
 ### Decisões
-- Abandonar Firecrawl MCP como método principal.
 - Usar OAI-PMH como fonte primária de metadados.
 - Usar scraping leve (`requests` + BeautifulSoup) apenas como complemento para TOCs e PDFs.
 - Citar o Holmes (Oddone & Andrade, 2006) como inspiração conceitual descontinuada.

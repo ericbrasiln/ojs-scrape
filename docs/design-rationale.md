@@ -10,9 +10,7 @@ Para uso da CLI, consulte o `README.md`.
 O pacote responde a uma necessidade recorrente em pesquisa acadêmica: coletar metadados estruturados de periódicos hospedados em OJS.
 
 O caso inicial foi a revista Afro-Ásia.
-A tentativa com Firecrawl mostrou que scraping comercial funciona para páginas pontuais, mas não é o método adequado para coleta sistemática de metadados OJS.
-
-A razão é simples: o OJS já expõe metadados por OAI-PMH.
+A arquitetura foi definida a partir de uma constatação metodológica: o OJS já expõe metadados por OAI-PMH.
 OAI-PMH é um protocolo aberto feito para colheita de metadados por máquinas.
 
 Usar scraping pesado para dados já publicados em OAI-PMH adiciona custo, fragilidade e dependência externa sem ganho metodológico proporcional.
@@ -52,12 +50,7 @@ Fonte primária: OAI-PMH.
 
 Complemento: scraping leve com `requests` e BeautifulSoup.
 
-Não usar:
-
-- Firecrawl como método principal;
-- Selenium;
-- navegador headless;
-- scraping pesado para metadados que já estão no OAI-PMH.
+Não usar scraping pesado para metadados que já estão no OAI-PMH.
 
 ## OAI-PMH como fonte primária
 
