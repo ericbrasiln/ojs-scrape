@@ -39,6 +39,24 @@ Validação com História da Historiografia: 842 artigos exportados na coleta co
 
 Observação sobre datas: `--from` e `--until` são interpretados como recorte por data de publicação. O OAI-PMH usa esses parâmetros como `datestamp`; por isso o pacote aplica também filtro local por `dc:date` para evitar que artigos antigos atualizados recentemente entrem no recorte.
 
+## Processo de desenvolvimento com Hermes Agent
+
+Este pacote foi desenvolvido com apoio do [Hermes Agent](https://github.com/NousResearch/hermes-agent), em diálogo com o pesquisador Eric Brasil.
+
+O processo combinou:
+
+- validação empírica de endpoints OAI-PMH reais;
+- comparação entre Firecrawl e protocolo aberto;
+- implementação incremental da CLI;
+- testes com revistas concretas, sobretudo Afro-Ásia e História da Historiografia;
+- transformação de falhas reais em testes de regressão;
+- refatoração para padrões atuais de Python;
+- validação com Ruff, MyPy, pytest e build via `uv`.
+
+Hermes Agent foi usado como ferramenta de trabalho e automação. As decisões metodológicas e acadêmicas permaneceram sob julgamento humano.
+
+Agentes de código que forem usar ou modificar este repositório devem ler [`AGENTS.md`](AGENTS.md).
+
 ## Instalação para desenvolvimento
 
 ```bash

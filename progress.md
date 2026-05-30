@@ -112,3 +112,20 @@
 - `uv run pytest -q` → 15 passed, 4 skipped.
 - `uv run pytest -q --run-integration` → 19 passed.
 - `uv build` → gerou wheel e sdist.
+
+## Session 4 — 2026-05-30
+
+### Documentação para agentes
+- Criou `AGENTS.md` na raiz do repositório.
+- O arquivo orienta agentes de código sobre:
+  - escopo do pacote;
+  - decisão metodológica por OAI-PMH;
+  - processo de desenvolvimento com Hermes Agent;
+  - comandos de setup, uso e quality gate;
+  - semântica de datas (`dc:date` vs. `datestamp` OAI);
+  - tratamento de XML inválido;
+  - sets, edições e TOC;
+  - exportação e arquivos gerados;
+  - convenções de Git (`main`, nunca `master`).
+- Atualizou `README.md` com seção sobre o processo de desenvolvimento com Hermes Agent.
+- Explicitou que Hermes Agent foi usado como ferramenta de trabalho e automação, não como fonte de autoridade acadêmica.
