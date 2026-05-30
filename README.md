@@ -2,34 +2,51 @@
 
 Ferramenta CLI em Python para coleta estruturada de dados de periódicos acadêmicos hospedados em OJS (Open Journal Systems).
 
-## Por que NÃO usar Firecrawl MCP
+## Decisão metodológica: por que NÃO usar Firecrawl MCP
 
-O Firecrawl (API de web scraping comercial) foi testado como método de coleta. Resultados negativos:
+O Firecrawl foi testado como método de coleta para a revista Afro-Ásia. Resultado:
 
-- `extract`: ~41 credits/artigo → plano free (1000/mês) esgota em ~24 artigos
-- `scrape`: ~1 credit/página → viável em custo, mas OAI-PMH faz o mesmo grátis
-- `map`: não funciona com OJS (retorna 1 link)
-- Rate limiting agressivo, créditos esgotam rápido
-- Dependência de API key e serviço comercial para dados que já estão abertos
+- `extract`: ~41 créditos/artigo. O plano free de 1000 créditos/mês esgota em ~24 artigos.
+- `scrape`: ~1 crédito/página. Funciona, mas é desnecessário para metadados já disponíveis via OAI-PMH.
+- `map`: não mapeou bem páginas OJS.
+- Dependência de API key e serviço comercial para dados acadêmicos já expostos por protocolo aberto.
 
-**Decisão**: OJS já expõe metadados via **OAI-PMH** (protocolo aberto, gratuito, padronizado). Usar scraping para dados que o OAI-PMH fornece gratuitamente é a abordagem errada.
+**Decisão**: usar **OAI-PMH** como fonte primária. Usar scraping apenas como complemento leve para dados não cobertos pelo protocolo, como mapeamento artigo → edição e links de PDF.
 
-## Método: OAI-PMH + scraping leve
+## Método
 
-**Primário**: OAI-PMH (`{base_url}/oai/`) — coleta de metadados completos (título, autores, resumo, palavras-chave, DOI, data, páginas) via Dublin Core. Sem custo, sem API key, sem rate limiting agressivo. Suporta recorte temporal (`from`/`until`) e filtro por seção (`set`).
+**Primário**: OAI-PMH (`{base_url}/oai`) para metadados Dublin Core:
 
-**Complementar**: Scraping leve com `requests` + BeautifulSoup para:
-- Mapear artigos a edições (OAI-PMH filtra por seção, não por edição)
-- Obter links de PDF (OAI-PMH não fornece URL direta do PDF)
+- título
+- autores
+- resumo
+- palavras-chave
+- DOI
+- data
+- fonte/revista
+- idioma
+- identificadores
 
-Valicão com Afro-Ásia: 127 registros 2024-2025, Dublin Core com resumo e palavras-chave, paginação via resumptionToken. Ver `findings.md`.
+**Complementar**: `requests` + BeautifulSoup para:
 
-## Instalação
+- identificar artigos dentro de edições específicas;
+- enriquecer seção, páginas e link de PDF a partir da TOC;
+- baixar PDFs quando solicitado.
+
+Validação com Afro-Ásia: 127 registros no recorte 2024-2025 via OAI-PMH. As edições n. 69, 70 e 71 retornam 104 registros quando cruzadas com suas TOCs.
+
+## Instalação para desenvolvimento
 
 ```bash
-pip install ojs-scrape
-# ou
-pipx install ojs-scrape
+git clone <repo>
+cd ojs-scrape
+uv sync
+```
+
+Executar a CLI local:
+
+```bash
+uv run ojs-scrape --help
 ```
 
 ## Uso
@@ -38,40 +55,72 @@ pipx install ojs-scrape
 # Coletar metadados da Afro-Ásia (2024-2025)
 ojs-scrape https://periodicos.ufba.br/index.php/afroasia --from 2024 --until 2025
 
-# Filtrar por seção
-ojs-scrape <URL> --from 2024 --set ART DOS
+# Salvar JSON
+ojs-scrape https://periodicos.ufba.br/index.php/afroasia \
+  --from 2024 --until 2025 \
+  -o afro_asia_2024_2025.json
 
-# Filtrar por edição
-ojs-scrape <URL> --issues 69 70 71
+# Filtrar por sets/seções OAI-PMH
+ojs-scrape https://periodicos.ufba.br/index.php/afroasia \
+  --from 2024 --until 2025 \
+  --set afroasia:ART afroasia:DOS
+
+# Filtrar por edições OJS (IDs internos da URL /issue/view/{id})
+ojs-scrape https://periodicos.ufba.br/index.php/afroasia \
+  --from 2024 --until 2025 \
+  --issues 2785 2858 2964
 
 # Buscar por autor
-ojs-scrape <URL> --from 2024 --author "Puntoni"
+ojs-scrape https://periodicos.ufba.br/index.php/afroasia \
+  --from 2024 --until 2025 \
+  --author "Puntoni"
 
-# Com download de PDFs
-ojs-scrape <URL> --from 2024 --pdf
+# Exportar CSV ou BibTeX
+ojs-scrape <URL> --from 2024 --until 2025 --format csv -o dados.csv
+ojs-scrape <URL> --from 2024 --until 2025 --format bibtex -o dados.bib
 
-# Formato de saída
-ojs-scrape <URL> --from 2024 --format csv
-ojs-scrape <URL> --from 2024 --format bibtex
-
-# Arquivo de saída
-ojs-scrape <URL> --from 2024 -o dados.json
+# Baixar PDFs junto com metadados
+ojs-scrape <URL> --from 2024 --until 2025 --pdf --pdf-dir pdfs/
 ```
 
-## Arquitetura
+## Estrutura
 
-```
-ojs_scrape/
+```text
+src/ojs_scrape/
 ├── cli.py        # Interface CLI (argparse)
-├── oaipmh.py     # Cliente OAI-PMH (Identify, ListSets, ListRecords)
-├── models.py     # Dataclass Article
-├── toc.py        # Scraping de TOCs (mapeamento article_id → issue)
+├── oaipmh.py     # Cliente OAI-PMH (Identify, ListSets, ListRecords, GetRecord)
+├── models.py     # Dataclasses tipadas: Article, OJSJournal, OAISet
+├── toc.py        # Scraping leve de TOCs OJS
 ├── pdf.py        # Download de PDFs
-├── filters.py    # Filtros: edição, autor
-└── exporters.py  # JSON, CSV, BibTeX
+├── filters.py    # Filtros por edição, autor, set e data
+├── exporters.py  # JSON, CSV, BibTeX
+└── py.typed      # Marcador PEP 561
 ```
 
-Dependências: `requests`, `beautifulsoup4`. Sem API keys. Sem Firecrawl. Sem Selenium.
+Dependências de runtime: `requests`, `beautifulsoup4`. Sem API keys. Sem Firecrawl. Sem Selenium.
+
+## Qualidade de código
+
+```bash
+uv run ruff format --check .
+uv run ruff check .
+uv run mypy
+uv run pytest -q
+uv run pytest -q --run-integration
+uv build
+```
+
+Padrões adotados:
+
+- layout `src/`;
+- `pyproject.toml` como fonte única de configuração;
+- Python `>=3.12`;
+- type aliases com sintaxe `type`;
+- dataclasses com `slots=True`;
+- pacote tipado com `py.typed`;
+- Ruff para lint/format;
+- MyPy em modo `strict`;
+- testes unitários separados de testes de integração.
 
 ## Licença
 
@@ -79,7 +128,8 @@ GNU General Public License v3 — em alinhamento com o espírito do PKP Open Har
 
 ## Referência
 
-O [Holmes](http://www.holmes.feudo.org) foi um harvester OAI-PMH desenvolvido por Nanci Oddone e Ricardo Sodré Andrade (LABHD/UFBA) sobre o PKP Open Harvester Systems. Coletou metadados de 26 provedores e 13k+ documentos. Descontinuado, mas validou o método. O ojs-scrape retoma essa abordagem com nova implementação em Python.
+O Holmes foi um harvester OAI-PMH desenvolvido por Nanci Oddone e Ricardo Sodré Andrade (LABHD/UFBA) sobre o PKP Open Harvester Systems. Coletou metadados de 26 provedores e 13k+ documentos. Está descontinuado, mas validou o método. O `ojs-scrape` retoma essa abordagem com nova implementação em Python.
 
 Referência:
+
 - Oddone, Nanci; Andrade, Ricardo Sodré. "Sistema de acesso à informação baseado em Open Archives: a experiência do Holmes." In: *SNBU — Seminário Nacional de Bibliotecas Universitárias*, 14., 2006, Salvador. Disponível em: http://repositorio.febab.org.br/items/show/5703
