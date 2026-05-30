@@ -1,32 +1,5 @@
 # Findings: OJS-Scrape
 
-## Firecrawl MCP — Resultados e Limitações
-
-### Teste de `scrape` (markdown)
-- **Custo**: ~1 credit por página
-- **Funcional**: Retorna markdown limpo e estruturado de páginas OJS
-- **Qualidade**: Alta — OJS gera HTML bem estruturado que o Firecrawl converte em markdown previsível
-- **Exemplo de saída**: Títulos como `# Título`, seções `## Autores`, `## DOI:`, `## Palavras-chave:`, `## Resumo`
-
-### Teste de `extract` (LLM)
-- **Custo**: ~41 credits por artigo (40-60x mais caro que scrape)
-- **Funcional**: Retorna JSON estruturado com metadados completos
-- **Qualidade**: Alta para artigos regulares; alucina palavras-chave para "Expediente"
-- **Problema**: 101 artigos × 41 credits = 4141 credits → esgota plano free (1000/mês)
-
-### Teste de `map`
-- **Custo**: ~1 credit
-- **Não funcional**: Retorna apenas 1 link em páginas OJS (provavelmente não consegue descobrir links sem JS)
-
-### SDK Python (v4.28.2)
-- `app.scrape(url, formats=["markdown"])` → funciona
-- `app.extract(urls=[...], prompt="...")` → funciona (caro)
-- `app.map(url)` → não funciona para OJS
-- `app.get_credit_usage()` → retorna `remaining_credits`, `plan_credits`, datas de billing
-
-### Conclusão
-Firecrawl é viável para scraping pontual de poucas páginas. Para coletas sistemáticas de periódicos (>100 artigos), o custo é insustentável no plano free. OAI-PMH é a alternativa correta.
-
 ## Escopo de compatibilidade do ojs-scrape
 
 O pacote não deve ser descrito como compatível com qualquer revista OJS.

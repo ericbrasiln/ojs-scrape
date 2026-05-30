@@ -3,7 +3,6 @@
 ## Session 1 — 2026-05-30
 
 ### Decisões
-- Abandonar Firecrawl MCP como método principal.
 - Usar OAI-PMH como fonte primária de metadados.
 - Usar scraping leve (`requests` + BeautifulSoup) apenas como complemento para TOCs e PDFs.
 - Citar o Holmes (Oddone & Andrade, 2006) como inspiração conceitual descontinuada.
@@ -183,3 +182,55 @@
 - Removeu linguagem de bastidor e seções de raciocínio numerado.
 - Preservou as decisões metodológicas e arquiteturais em formato de design rationale.
 - Atualizou referências internas ao documento renomeado.
+
+## Session 8 — 2026-05-30
+
+### Documentação com MkDocs Material
+- Configurou MkDocs Material como framework de documentação.
+- Adicionou `mkdocstrings[python]` para referência de API a partir do código.
+- Definiu `site_url` como `https://ericbrasil.com.br/ojs-scrape`.
+- Adicionou `[project.urls]` ao `pyproject.toml`:
+  - Homepage e Documentation: `https://ericbrasil.com.br/ojs-scrape`;
+  - Repository: `https://github.com/ericbrasiln/ojs-scrape`;
+  - Issues: `https://github.com/ericbrasiln/ojs-scrape/issues`.
+- Criou páginas de documentação:
+  - início;
+  - instalação;
+  - uso;
+  - CLI;
+  - PDFs;
+  - API Python;
+  - compatibilidade;
+  - desenvolvimento.
+- Incluiu `mkdocs.yml` e `docs/` no sdist.
+- Adicionou `site/` ao `.gitignore`.
+- Validou com `uv run --group docs mkdocs build --strict`.
+- Validou `twine check dist/*`.
+
+## Session 9 — 2026-05-30
+
+### Citação, agradecimentos e transparência
+- Adicionou `CITATION.cff` inspirado no padrão do `pyHDB`.
+- Criou página `docs/citation.md` com citação recomendada e BibTeX.
+- Criou página `docs/credits-transparency.md` com:
+  - agradecimento a Ricardo Sodré Andrade;
+  - agradecimento ao LABHDUFBA;
+  - nota sobre uso de IA generativa no desenvolvimento;
+  - finalidade não lucrativa e limites éticos da ferramenta.
+- Atualizou a página inicial da documentação com nota de escopo ético e vínculo institucional.
+- Atualizou o README, usado também como descrição longa no PyPI, com:
+  - escopo ético;
+  - vínculo com o LABHDUFBA;
+  - citação;
+  - agradecimentos;
+  - transparência sobre uso de IA.
+- Incluiu `CITATION.cff` no sdist.
+
+## Session 10 — 2026-05-30
+
+### Publicação da documentação
+- Criou workflow `.github/workflows/docs.yml`.
+- Em pull requests, o workflow valida `uv run mkdocs build --strict` sem publicar.
+- Em pushes para `main`, o workflow gera o site e publica no GitHub Pages.
+- Manteve `site_url` em `https://ericbrasil.com.br/ojs-scrape`, conforme uso atual do domínio nos sites do usuário.
+- Atualizou README e documentação de desenvolvimento com a regra de publicação.

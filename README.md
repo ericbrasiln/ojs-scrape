@@ -1,17 +1,18 @@
 # OJS-Scrape
 
-Ferramenta CLI em Python para coleta estruturada de dados de periódicos acadêmicos hospedados em OJS (Open Journal Systems).
+Ferramenta CLI e pacote Python para coleta estruturada de dados de periódicos acadêmicos hospedados em OJS (Open Journal Systems).
 
-## Decisão metodológica: por que NÃO usar Firecrawl MCP
+## Escopo ético e vínculo institucional
 
-O Firecrawl foi testado como método de coleta para a revista Afro-Ásia. Resultado:
+O `ojs-scrape` é desenvolvido sem fins lucrativos e sem pretensão de acessar dados sigilosos, contornar controles de acesso ou alterar informações nos servidores das instituições.
 
-- `extract`: ~41 créditos/artigo. O plano free de 1000 créditos/mês esgota em ~24 artigos.
-- `scrape`: ~1 crédito/página. Funciona, mas é desnecessário para metadados já disponíveis via OAI-PMH.
-- `map`: não mapeou bem páginas OJS.
-- Dependência de API key e serviço comercial para dados acadêmicos já expostos por protocolo aberto.
+A ferramenta é produzida no âmbito das pesquisas do [Laboratório de Humanidades Digitais da UFBA (LABHDUFBA)](https://labhdufba.github.io/).
 
-**Decisão**: usar **OAI-PMH** como fonte primária. Usar scraping apenas como complemento leve para dados não cobertos pelo protocolo, como mapeamento artigo → edição e links de PDF.
+## Decisão metodológica
+
+O `ojs-scrape` usa **OAI-PMH** como fonte primária para metadados.
+
+O scraping leve entra apenas como complemento para dados que o protocolo não cobre diretamente, como mapeamento artigo → edição e links de PDF.
 
 ## Método
 
@@ -80,7 +81,7 @@ Este pacote foi desenvolvido com apoio do [Hermes Agent](https://github.com/Nous
 O processo combinou:
 
 - validação empírica de endpoints OAI-PMH reais;
-- comparação entre Firecrawl e protocolo aberto;
+- definição de OAI-PMH como fonte primária;
 - implementação incremental da CLI;
 - testes com revistas concretas, sobretudo Afro-Ásia e História da Historiografia;
 - transformação de falhas reais em testes de regressão;
@@ -88,6 +89,28 @@ O processo combinou:
 - validação com Ruff, MyPy, pytest e build via `uv`.
 
 Hermes Agent foi usado como ferramenta de trabalho e automação. As decisões metodológicas e acadêmicas permaneceram sob julgamento humano.
+
+## Citação
+
+Se usar o `ojs-scrape` em pesquisa, ensino, desenvolvimento ou análise institucional, cite o software.
+
+Citação recomendada:
+
+```text
+BRASIL, Eric. OJS-Scrape: coleta de metadados de periódicos OJS via OAI-PMH. Versão 0.1.0. 2026. Software. Disponível em: https://ericbrasil.com.br/ojs-scrape.
+```
+
+O repositório inclui um arquivo [`CITATION.cff`](CITATION.cff) com metadados de citação.
+
+## Agradecimentos e transparência
+
+O projeto agradece a Ricardo Sodré Andrade pela referência intelectual e histórica associada ao Holmes e às experiências de colheita de metadados em periódicos científicos.
+
+Agradece também ao [Laboratório de Humanidades Digitais da UFBA (LABHDUFBA)](https://labhdufba.github.io/) pelo ambiente de pesquisa, interlocução e desenvolvimento metodológico em Humanidades Digitais.
+
+Este pacote e sua documentação foram desenvolvidos com apoio de sistemas de IA generativa, em especial o Hermes Agent, usado como ferramenta de automação, programação assistida, revisão técnica, organização documental e execução de testes.
+
+O uso de IA não substitui julgamento acadêmico, revisão humana ou validação empírica. As decisões sobre método, escopo, interpretação, licenciamento e publicação pertencem ao pesquisador responsável.
 
 Agentes de código que forem usar ou modificar este repositório devem ler [`AGENTS.md`](AGENTS.md).
 
@@ -106,6 +129,31 @@ Executar a CLI local:
 ```bash
 uv run ojs-scrape --help
 ```
+
+## Documentação
+
+A documentação pública do projeto será publicada em:
+
+```text
+https://ericbrasil.com.br/ojs-scrape
+```
+
+O site usa MkDocs Material com `mkdocstrings` para gerar referência de API a partir do código.
+
+Servir localmente:
+
+```bash
+uv run --group docs mkdocs serve
+```
+
+Gerar o site estático:
+
+```bash
+uv run --group docs mkdocs build --strict
+```
+
+A publicação da documentação é feita por GitHub Actions em pushes para `main`, usando GitHub Pages.
+Pull requests validam o build da documentação sem publicar.
 
 ## Uso
 
@@ -158,7 +206,7 @@ src/ojs_scrape/
 └── py.typed      # Marcador PEP 561
 ```
 
-Dependências de runtime: `requests`, `beautifulsoup4`. Sem API keys. Sem Firecrawl. Sem Selenium.
+Dependências de runtime: `requests`, `beautifulsoup4`. Sem API keys. Sem Selenium.
 
 ## Qualidade de código
 

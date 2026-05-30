@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "Se você usar o ojs-scrape em pesquisa, ensino, desenvolvimento ou análise institucional, cite este software conforme indicado abaixo."
+title: "OJS-Scrape: coleta de metadados de periódicos OJS via OAI-PMH"
+version: "0.1.0"
+date-released: 2026-05-30
+type: software
+authors:
+  - family-names: "Brasil"
+    given-names: "Eric"
+    orcid: "https://orcid.org/0000-0001-5067-8475"
+repository-code: "https://github.com/ericbrasiln/ojs-scrape"
+url: "https://ericbrasil.com.br/ojs-scrape"
+license: "GPL-3.0-only"
+keywords:
+  - "Open Journal Systems"
+  - "OAI-PMH"
+  - "metadados acadêmicos"
+  - "periódicos científicos"
+  - "humanidades digitais"
+abstract: |
+  OJS-Scrape é um pacote Python e uma ferramenta de linha de comando para coleta estruturada de metadados de periódicos hospedados em Open Journal Systems (OJS). A fonte primária é o protocolo OAI-PMH, com scraping leve usado apenas como complemento para mapear edições, enriquecer metadados e baixar PDFs públicos quando disponíveis. A ferramenta foi desenvolvida no âmbito das pesquisas do Laboratório de Humanidades Digitais da UFBA (LABHDUFBA), sem fins lucrativos e sem pretensão de acessar dados sigilosos ou alterar informações nos servidores das instituições.
+preferred-citation:
+  type: software
+  authors:
+    - family-names: "Brasil"
+      given-names: "Eric"
+  title: "OJS-Scrape: coleta de metadados de periódicos OJS via OAI-PMH"
+  version: "0.1.0"
+  year: 2026
+  url: "https://ericbrasil.com.br/ojs-scrape"
