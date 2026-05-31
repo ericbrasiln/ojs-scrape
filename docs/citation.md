@@ -1,5 +1,7 @@
 # Citação
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20470888.svg)](https://doi.org/10.5281/zenodo.20470888)
+
 Se você usar o `ojs-scrape` em pesquisa, ensino, desenvolvimento ou análise institucional, cite o software.
 
 O repositório inclui um arquivo [`CITATION.cff`](https://github.com/ericbrasiln/ojs-scrape/blob/main/CITATION.cff), que pode ser lido pelo GitHub, Zotero e outros gerenciadores bibliográficos.
@@ -7,7 +9,7 @@ O repositório inclui um arquivo [`CITATION.cff`](https://github.com/ericbrasiln
 ## Citação recomendada
 
 ```text
-BRASIL, Eric. OJS-Scrape: coleta de metadados de periódicos OJS via OAI-PMH. Versão 0.1.1. 2026. Software. Disponível em: https://ericbrasil.com.br/ojs-scrape.
+BRASIL, Eric. OJS-Scrape: coleta de metadados de periódicos OJS via OAI-PMH. Versão 0.1.1. 2026. Software. DOI: 10.5281/zenodo.20470889. Disponível em: https://ericbrasil.com.br/ojs-scrape.
 ```
 
 ## BibTeX
@@ -18,6 +20,7 @@ BRASIL, Eric. OJS-Scrape: coleta de metadados de periódicos OJS via OAI-PMH. Ve
   title = {OJS-Scrape: coleta de metadados de periódicos OJS via OAI-PMH},
   version = {0.1.1},
   year = {2026},
+  doi = {10.5281/zenodo.20470889},
   url = {https://ericbrasil.com.br/ojs-scrape},
   license = {GPL-3.0-only}
 }
@@ -26,16 +29,26 @@ BRASIL, Eric. OJS-Scrape: coleta de metadados de periódicos OJS via OAI-PMH. Ve
 ## CFF
 
 O conteúdo canônico de citação está em `CITATION.cff`.
-
-Enquanto não houver DOI depositado para uma versão arquivada, use a URL da documentação, do PyPI ou do repositório.
+Ele registra o DOI da versão arquivada no Zenodo.
 
 ## Zenodo
 
-O repositório está sincronizado com o Zenodo para arquivar releases futuras.
+O repositório está sincronizado com o Zenodo para arquivar releases.
 
-A próxima release publicada depois dessa configuração deverá gerar um DOI no Zenodo.
+DOI da versão `0.1.1`:
 
-Quando houver DOI, prefira citar a versão arquivada correspondente.
+```text
+10.5281/zenodo.20470889
+```
+
+DOI conceitual do projeto:
+
+```text
+10.5281/zenodo.20470888
+```
+
+Para reprodutibilidade, prefira citar o DOI da versão usada.
+Para menções gerais ao projeto, o DOI conceitual é adequado.
 
 O arquivo `.zenodo.json` define os metadados usados pelo Zenodo:
 
@@ -46,5 +59,4 @@ O arquivo `.zenodo.json` define os metadados usados pelo Zenodo:
 - palavras-chave;
 - relações com GitHub, PyPI e documentação pública.
 
-Não há DOI manualmente inventado nesta documentação.
-O DOI deve ser copiado do registro efetivamente criado pelo Zenodo depois da release.
+Os DOIs acima foram copiados do registro efetivamente criado pelo Zenodo para a release `v0.1.1`.

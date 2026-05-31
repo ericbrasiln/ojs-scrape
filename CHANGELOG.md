@@ -6,6 +6,10 @@ O formato segue a lógica de [Keep a Changelog](https://keepachangelog.com/), co
 
 ## [Unreleased]
 
+### Documented
+
+- DOI Zenodo da versão `0.1.1` e DOI conceitual do projeto na citação, README e página inicial da documentação.
+
 ## [0.1.1] - 2026-05-31
 
 ### Added

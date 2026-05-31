@@ -3,6 +3,7 @@
 [![PyPI version](https://img.shields.io/pypi/v/ojs-scrape.svg)](https://pypi.org/project/ojs-scrape/)
 [![Python versions](https://img.shields.io/pypi/pyversions/ojs-scrape.svg)](https://pypi.org/project/ojs-scrape/)
 [![License](https://img.shields.io/pypi/l/ojs-scrape.svg)](https://pypi.org/project/ojs-scrape/)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20470888.svg)](https://doi.org/10.5281/zenodo.20470888)
 [![Documentation](https://img.shields.io/badge/docs-ericbrasil.com.br%2Fojs--scrape-blue)](https://ericbrasil.com.br/ojs-scrape/)
 
 Ferramenta CLI e pacote Python para coleta estruturada de dados de periódicos acadêmicos hospedados em OJS (Open Journal Systems).
@@ -116,7 +117,7 @@ Se usar o `ojs-scrape` em pesquisa, ensino, desenvolvimento ou análise instituc
 Citação recomendada:
 
 ```text
-BRASIL, Eric. OJS-Scrape: coleta de metadados de periódicos OJS via OAI-PMH. Versão 0.1.1. 2026. Software. Disponível em: https://ericbrasil.com.br/ojs-scrape.
+BRASIL, Eric. OJS-Scrape: coleta de metadados de periódicos OJS via OAI-PMH. Versão 0.1.1. 2026. Software. DOI: 10.5281/zenodo.20470889. Disponível em: https://ericbrasil.com.br/ojs-scrape.
 ```
 
 O repositório inclui um arquivo [`CITATION.cff`](CITATION.cff) com metadados de citação.

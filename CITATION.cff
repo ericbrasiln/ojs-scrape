@@ -3,6 +3,7 @@ message: "Se você usar o ojs-scrape em pesquisa, ensino, desenvolvimento ou an�
 title: "OJS-Scrape: coleta de metadados de periódicos OJS via OAI-PMH"
 version: "0.1.1"
 date-released: 2026-05-31
+doi: 10.5281/zenodo.20470889
 type: software
 authors:
   - family-names: "Brasil"
@@ -26,5 +27,6 @@ preferred-citation:
       given-names: "Eric"
   title: "OJS-Scrape: coleta de metadados de periódicos OJS via OAI-PMH"
   version: "0.1.1"
+  doi: 10.5281/zenodo.20470889
   year: 2026
   url: "https://ericbrasil.com.br/ojs-scrape"
