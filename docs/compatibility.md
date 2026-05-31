@@ -6,6 +6,15 @@ Formulação segura:
 
 > `ojs-scrape` coleta metadados de periódicos OJS que exponham OAI-PMH público e baixa PDFs públicos quando os artigos usam galleys OJS acessíveis por URL padrão ou detectável.
 
+## Sistemas operacionais
+
+Os testes realizados até agora foram feitos em Linux.
+
+O pacote deve funcionar em Windows com Python 3.12 ou superior, porque usa Python puro e dependências portáveis (`requests` e `beautifulsoup4`).
+
+Essa compatibilidade ainda não foi validada em ambiente Windows.
+Testes específicos em Windows estão previstos.
+
 ## Metadados
 
 A coleta de metadados depende de:
