@@ -14,6 +14,7 @@ O formato segue a lógica de [Keep a Changelog](https://keepachangelog.com/), co
 
 ### Documented
 
+- Link e badges do pacote no PyPI em destaque no README e na página inicial da documentação.
 - Fluxo de citação com Zenodo: o DOI deve ser copiado do depósito real criado pelo Zenodo após a release, sem DOI manualmente inventado antes do arquivamento.
 - Etapa de conferência do Zenodo no processo de publicação de versão.
 
