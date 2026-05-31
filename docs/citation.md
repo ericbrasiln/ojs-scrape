@@ -7,7 +7,7 @@ O repositório inclui um arquivo [`CITATION.cff`](https://github.com/ericbrasiln
 ## Citação recomendada
 
 ```text
-BRASIL, Eric. OJS-Scrape: coleta de metadados de periódicos OJS via OAI-PMH. Versão 0.1.0. 2026. Software. Disponível em: https://ericbrasil.com.br/ojs-scrape.
+BRASIL, Eric. OJS-Scrape: coleta de metadados de periódicos OJS via OAI-PMH. Versão 0.1.1. 2026. Software. Disponível em: https://ericbrasil.com.br/ojs-scrape.
 ```
 
 ## BibTeX
@@ -16,7 +16,7 @@ BRASIL, Eric. OJS-Scrape: coleta de metadados de periódicos OJS via OAI-PMH. Ve
 @software{brasil_ojs_scrape_2026,
   author = {Brasil, Eric},
   title = {OJS-Scrape: coleta de metadados de periódicos OJS via OAI-PMH},
-  version = {0.1.0},
+  version = {0.1.1},
   year = {2026},
   url = {https://ericbrasil.com.br/ojs-scrape},
   license = {GPL-3.0-only}

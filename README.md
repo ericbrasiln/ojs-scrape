@@ -116,7 +116,7 @@ Se usar o `ojs-scrape` em pesquisa, ensino, desenvolvimento ou análise instituc
 Citação recomendada:
 
 ```text
-BRASIL, Eric. OJS-Scrape: coleta de metadados de periódicos OJS via OAI-PMH. Versão 0.1.0. 2026. Software. Disponível em: https://ericbrasil.com.br/ojs-scrape.
+BRASIL, Eric. OJS-Scrape: coleta de metadados de periódicos OJS via OAI-PMH. Versão 0.1.1. 2026. Software. Disponível em: https://ericbrasil.com.br/ojs-scrape.
 ```
 
 O repositório inclui um arquivo [`CITATION.cff`](CITATION.cff) com metadados de citação.

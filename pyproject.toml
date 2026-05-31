@@ -1,6 +1,6 @@
 [project]
 name = "ojs-scrape"
-version = "0.1.0"
+version = "0.1.1"
 description = "Ferramenta CLI para coleta de dados estruturados de periódicos OJS via OAI-PMH"
 readme = "README.md"
 license = "GPL-3.0-only"
