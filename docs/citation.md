@@ -27,6 +27,24 @@ BRASIL, Eric. OJS-Scrape: coleta de metadados de periódicos OJS via OAI-PMH. Ve
 
 O conteúdo canônico de citação está em `CITATION.cff`.
 
-Enquanto não houver DOI depositado para uma versão arquivada, use a URL da documentação ou do repositório.
+Enquanto não houver DOI depositado para uma versão arquivada, use a URL da documentação, do PyPI ou do repositório.
 
-Se uma versão futura for depositada no Zenodo ou em outro repositório, prefira o DOI daquela versão.
+## Zenodo
+
+O repositório está sincronizado com o Zenodo para arquivar releases futuras.
+
+A próxima release publicada depois dessa configuração deverá gerar um DOI no Zenodo.
+
+Quando houver DOI, prefira citar a versão arquivada correspondente.
+
+O arquivo `.zenodo.json` define os metadados usados pelo Zenodo:
+
+- título;
+- autor e ORCID;
+- descrição do software;
+- licença;
+- palavras-chave;
+- relações com GitHub, PyPI e documentação pública.
+
+Não há DOI manualmente inventado nesta documentação.
+O DOI deve ser copiado do registro efetivamente criado pelo Zenodo depois da release.

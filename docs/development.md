@@ -68,8 +68,14 @@ Antes de publicar uma versão:
 6. Publique primeiro no TestPyPI e teste a instalação a partir dele.
 7. Crie a tag da versão.
 8. Publique no PyPI real.
+9. Crie a GitHub Release.
+10. Confirme se o Zenodo arquivou a release e gerou DOI.
+11. Se houver DOI novo, atualize a documentação de citação em uma mudança posterior.
 
 PyPI não permite reenviar a mesma versão. Se uma versão publicada tiver erro, publique uma nova versão de correção.
+
+O Zenodo lê os metadados de `.zenodo.json` quando arquiva releases sincronizadas pelo GitHub.
+Não registre DOI manualmente antes de verificar o depósito real criado pelo Zenodo.
 
 ## Regras de método
 
