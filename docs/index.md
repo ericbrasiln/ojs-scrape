@@ -3,6 +3,7 @@
 [![PyPI version](https://img.shields.io/pypi/v/ojs-scrape.svg)](https://pypi.org/project/ojs-scrape/)
 [![Python versions](https://img.shields.io/pypi/pyversions/ojs-scrape.svg)](https://pypi.org/project/ojs-scrape/)
 [![License](https://img.shields.io/pypi/l/ojs-scrape.svg)](https://pypi.org/project/ojs-scrape/)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20470888.svg)](https://doi.org/10.5281/zenodo.20470888)
 
 `ojs-scrape` é um pacote Python e uma ferramenta de linha de comando para coletar metadados estruturados de periódicos hospedados em OJS.
 
