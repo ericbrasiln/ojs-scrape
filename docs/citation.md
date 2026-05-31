@@ -1,5 +1,7 @@
 # Citação
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20470888.svg)](https://doi.org/10.5281/zenodo.20470888)
+
 Se você usar o `ojs-scrape` em pesquisa, ensino, desenvolvimento ou análise institucional, cite o software.
 
 O repositório inclui um arquivo [`CITATION.cff`](https://github.com/ericbrasiln/ojs-scrape/blob/main/CITATION.cff), que pode ser lido pelo GitHub, Zotero e outros gerenciadores bibliográficos.
