@@ -9,6 +9,7 @@ O formato segue a lógica de [Keep a Changelog](https://keepachangelog.com/), co
 ### Documented
 
 - DOI Zenodo da versão `0.1.1` e DOI conceitual do projeto na citação, README e página inicial da documentação.
+- Nota de compatibilidade informando que o pacote foi testado em Linux e deve funcionar em Windows, mas ainda aguarda validação específica nesse sistema.
 
 ## [0.1.1] - 2026-05-31
 

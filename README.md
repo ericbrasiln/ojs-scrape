@@ -22,6 +22,8 @@ Instalação:
 pip install ojs-scrape
 ```
 
+Nota sobre sistemas operacionais: até o momento, o `ojs-scrape` foi testado pelo mantenedor em Linux. Como é um pacote Python puro, com dependências portáveis, a expectativa é que também funcione em Windows com Python 3.12 ou superior. Essa compatibilidade ainda não foi validada; testes em Windows estão previstos.
+
 ## Escopo ético e vínculo institucional
 
 O `ojs-scrape` é desenvolvido sem fins lucrativos e sem pretensão de acessar dados sigilosos, contornar controles de acesso ou alterar informações nos servidores das instituições.
@@ -68,6 +70,8 @@ Observação sobre datas: `--from` e `--until` são interpretados como recorte p
 O `ojs-scrape` não promete funcionar com qualquer periódico OJS.
 
 Formulação segura: o pacote coleta metadados de periódicos OJS que exponham OAI-PMH público e baixa PDFs públicos quando os artigos usam galleys OJS acessíveis por URL padrão ou detectável.
+
+Compatibilidade por sistema operacional: os testes realizados até agora foram feitos em Linux. O pacote deve funcionar em Windows por usar Python puro e bibliotecas portáveis (`requests` e `beautifulsoup4`), mas essa compatibilidade ainda não foi validada em ambiente Windows. Testes específicos em Windows estão planejados.
 
 Para metadados, a compatibilidade depende de:
 
