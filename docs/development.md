@@ -49,8 +49,8 @@ Publicação:
 
 Antes de publicar uma versão:
 
-1. Atualize a versão em `pyproject.toml`.
-2. Atualize a versão em `CITATION.cff`, quando aplicável.
+1. Atualize a versão em `pyproject.toml` e `src/ojs_scrape/__init__.py`.
+2. Atualize a versão e a data em `CITATION.cff`, quando aplicável.
 3. Atualize o [`CHANGELOG.md`](https://github.com/ericbrasiln/ojs-scrape/blob/main/CHANGELOG.md).
 4. Rode o quality gate completo:
 
@@ -66,11 +66,12 @@ Antes de publicar uma versão:
 
 5. Teste a instalação limpa do wheel gerado em `dist/`.
 6. Publique primeiro no TestPyPI e teste a instalação a partir dele.
-7. Crie a tag da versão.
-8. Publique no PyPI real.
-9. Crie a GitHub Release.
-10. Confirme se o Zenodo arquivou a release e gerou DOI.
-11. Se houver DOI novo, atualize a documentação de citação em uma mudança posterior.
+7. Publique no PyPI real.
+8. Teste a instalação limpa a partir do PyPI real.
+9. Crie e publique a tag da versão.
+10. Crie a GitHub Release com os artefatos publicados.
+11. Confirme se o Zenodo arquivou a release e gerou DOI.
+12. Se houver DOI novo, atualize a documentação de citação em uma mudança posterior.
 
 PyPI não permite reenviar a mesma versão. Se uma versão publicada tiver erro, publique uma nova versão de correção.
 

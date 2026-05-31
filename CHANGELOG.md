@@ -6,11 +6,16 @@ O formato segue a lógica de [Keep a Changelog](https://keepachangelog.com/), co
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-05-31
+
 ### Added
 
 - `--format` agora aceita múltiplos formatos na mesma execução, por exemplo `--format json csv bibtex`.
-- `-o`/`--output` agora é tratado como nome base sem extensão; a CLI gera `.json`, `.csv` ou `.bib` conforme o formato exportado.
 - Metadados `.zenodo.json` para arquivamento automático de releases futuras via Zenodo-GitHub.
+
+### Changed
+
+- `-o`/`--output` agora é tratado como nome base sem extensão; a CLI gera `.json`, `.csv` ou `.bib` conforme o formato exportado.
 
 ### Documented
 
