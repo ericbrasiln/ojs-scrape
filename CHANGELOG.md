@@ -4,6 +4,13 @@ Todas as mudanças relevantes do `ojs-scrape` são registradas neste arquivo.
 
 O formato segue a lógica de [Keep a Changelog](https://keepachangelog.com/), com adaptações para o contexto do projeto.
 
+## [Unreleased]
+
+### Added
+
+- `--format` agora aceita múltiplos formatos na mesma execução, por exemplo `--format json csv bibtex`.
+- `-o`/`--output` agora é tratado como nome base sem extensão; a CLI gera `.json`, `.csv` ou `.bib` conforme o formato exportado.
+
 ## [0.1.0] - 2026-05-30
 
 Primeira versão alpha do pacote Python e da ferramenta CLI.

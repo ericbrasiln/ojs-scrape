@@ -6,7 +6,7 @@
 ojs-scrape "https://periodicos.ufba.br/index.php/afroasia" \
   --from 2024 \
   --until 2025 \
-  -o afro_asia_2024_2025.json
+  -o afro_asia_2024_2025
 ```
 
 `--from` e `--until` aceitam ano ou data completa.
@@ -20,24 +20,38 @@ Exemplos:
 --until 2025-12-31
 ```
 
-## Exportar CSV
+## Exportar formatos
 
 ```bash
 ojs-scrape "https://periodicos.ufba.br/index.php/afroasia" \
   --from 2024 \
   --until 2025 \
-  --format csv \
-  -o afro_asia.csv
+  --format json csv bibtex \
+  -o afro_asia
 ```
 
-## Exportar BibTeX
+Esse comando gera:
+
+```text
+afro_asia.json
+afro_asia.csv
+afro_asia.bib
+```
+
+`--format` aceita um ou mais formatos: `json`, `csv`, `bibtex`.
+O padrão é apenas `json`.
+
+`-o`/`--output` recebe o nome base do arquivo, sem extensão.
+O pacote adiciona a extensão conforme o formato.
+
+## Exportar apenas BibTeX
 
 ```bash
 ojs-scrape "https://periodicos.ufba.br/index.php/afroasia" \
   --from 2024 \
   --until 2025 \
   --format bibtex \
-  -o afro_asia.bib
+  -o afro_asia
 ```
 
 ## Filtrar por autor
@@ -47,7 +61,7 @@ ojs-scrape "https://periodicos.ufba.br/index.php/afroasia" \
   --from 2024 \
   --until 2025 \
   --author "Puntoni" \
-  -o puntoni.json
+  -o puntoni
 ```
 
 A busca por autor é local, com correspondência por substring sem diferenciar maiúsculas e minúsculas.
@@ -59,7 +73,7 @@ ojs-scrape "https://periodicos.ufba.br/index.php/afroasia" \
   --from 2024 \
   --until 2025 \
   --set afroasia:ART afroasia:DOS \
-  -o artigos_dossie.json
+  -o artigos_dossie
 ```
 
 OAI-PMH aceita um set por requisição.
@@ -72,7 +86,7 @@ ojs-scrape "https://periodicos.ufba.br/index.php/afroasia" \
   --from 2024 \
   --until 2025 \
   --issues 2785 2858 2964 \
-  -o edicoes_69_71.json
+  -o edicoes_69_71
 ```
 
 Os números usados em `--issues` são IDs internos das URLs OJS:

@@ -21,7 +21,8 @@ Opções principais:
 - `--set`: sets/seções OAI-PMH;
 - `--issues`: IDs internos de edições OJS;
 - `--author`: filtro local por autor;
-- `--format`: `json`, `csv` ou `bibtex`;
+- `--format`: um ou mais formatos: `json`, `csv`, `bibtex`; padrão: `json`;
+- `-o`/`--output`: nome base da saída, sem extensão; o pacote adiciona `.json`, `.csv` ou `.bib`;
 - `--pdf`: baixa PDFs públicos;
 - `--pdf-limit`: limita a quantidade de PDFs baixados para teste;
 - `--pdf-dir`: diretório de saída dos PDFs;

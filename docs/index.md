@@ -27,7 +27,7 @@ Scraping leve com `requests` e BeautifulSoup é usado apenas como complemento pa
 ojs-scrape "https://periodicos.ufba.br/index.php/afroasia" \
   --from 2024 \
   --until 2025 \
-  -o afro_asia_2024_2025.json
+  -o afro_asia_2024_2025
 ```
 
 ## Método
