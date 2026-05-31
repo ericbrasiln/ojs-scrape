@@ -3,8 +3,15 @@
 from __future__ import annotations
 
 import json
+from pathlib import Path
 
-from ojs_scrape.cli import _active_article_count, _normalize_date, build_parser
+from ojs_scrape.cli import (
+    _active_article_count,
+    _export_outputs,
+    _normalize_date,
+    _resolve_output_paths,
+    build_parser,
+)
 from ojs_scrape.exporters import to_bibtex, to_csv, to_json
 from ojs_scrape.models import Article
 
@@ -27,6 +34,53 @@ def test_parser_accepts_pdf_limit_option() -> None:
 
     assert opts.pdf is True
     assert opts.pdf_limit == 3
+
+
+def test_parser_accepts_multiple_output_formats() -> None:
+    opts = build_parser().parse_args(
+        ["https://example.org/journal", "--format", "json", "csv", "bibtex"]
+    )
+
+    assert opts.output_formats == ["json", "csv", "bibtex"]
+
+
+def test_parser_defaults_to_json_output_format() -> None:
+    opts = build_parser().parse_args(["https://example.org/journal"])
+
+    assert opts.output_formats == ["json"]
+
+
+def test_resolve_output_paths_uses_base_name_and_format_extensions(tmp_path: Path) -> None:
+    paths = _resolve_output_paths(str(tmp_path / "coleta"), ["json", "csv", "bibtex"])
+
+    assert paths == [
+        str(tmp_path / "coleta.json"),
+        str(tmp_path / "coleta.csv"),
+        str(tmp_path / "coleta.bib"),
+    ]
+
+
+def test_resolve_output_paths_defaults_to_json_base_name() -> None:
+    assert _resolve_output_paths(None, ["json"]) == ["ojs_scrape_output.json"]
+
+
+def test_resolve_output_paths_replaces_known_extension() -> None:
+    assert _resolve_output_paths("coleta.json", ["csv"]) == ["coleta.csv"]
+
+
+def test_export_outputs_writes_all_requested_formats(tmp_path: Path) -> None:
+    article = Article(article_id=1, title="Afro-Ásia", creators=["Brasil, Eric"])
+
+    paths = _export_outputs([article], str(tmp_path / "coleta"), ["json", "csv", "bibtex"])
+
+    assert paths == [
+        str(tmp_path / "coleta.json"),
+        str(tmp_path / "coleta.csv"),
+        str(tmp_path / "coleta.bib"),
+    ]
+    assert json.loads((tmp_path / "coleta.json").read_text())[0]["title"] == "Afro-Ásia"
+    assert "Afro-Ásia" in (tmp_path / "coleta.csv").read_text()
+    assert "@article" in (tmp_path / "coleta.bib").read_text()
 
 
 def test_to_json_serializes_unicode() -> None:

@@ -51,18 +51,21 @@ Coleta básica:
 uv run ojs-scrape "https://periodicos.ufba.br/index.php/afroasia" \
   --from 2024 \
   --until 2025 \
-  -o output.json
+  -o output
 ```
 
-Exportar CSV:
+Exportar múltiplos formatos:
 
 ```bash
 uv run ojs-scrape "https://periodicos.ufba.br/index.php/afroasia" \
   --from 2024 \
   --until 2025 \
-  --format csv \
-  -o output.csv
+  --format json csv bibtex \
+  -o output
 ```
+
+`--format` aceita um ou mais valores.
+`-o` recebe nome base sem extensão; a CLI gera `.json`, `.csv` ou `.bib`.
 
 Filtrar por edições OJS:
 
@@ -71,7 +74,7 @@ uv run ojs-scrape "https://periodicos.ufba.br/index.php/afroasia" \
   --from 2024 \
   --until 2025 \
   --issues 2785 2858 2964 \
-  -o output.json
+  -o output
 ```
 
 Testar download de poucos PDFs:
@@ -83,7 +86,7 @@ uv run ojs-scrape "https://periodicos.ufba.br/index.php/afroasia" \
   --pdf \
   --pdf-limit 3 \
   --pdf-dir pdfs_teste/ \
-  -o output.json
+  -o output
 ```
 
 ## Quality gate obrigatório

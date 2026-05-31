@@ -6,6 +6,7 @@ import argparse
 import logging
 import sys
 from collections.abc import Sequence
+from pathlib import Path
 
 from .exporters import to_bibtex, to_csv, to_json
 from .filters import filter_by_author, filter_by_issue_ids, filter_by_publication_date_range
@@ -15,6 +16,13 @@ from .pdf import download_pdfs
 from .toc import scrape_issue_toc
 
 logger = logging.getLogger(__name__)
+
+OUTPUT_EXTENSIONS = {
+    "json": ".json",
+    "csv": ".csv",
+    "bibtex": ".bib",
+}
+KNOWN_OUTPUT_SUFFIXES = frozenset({".json", ".csv", ".bib", ".bibtex"})
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -43,11 +51,13 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--format",
-        dest="output_format",
+        dest="output_formats",
         choices=["json", "csv", "bibtex"],
-        default="json",
+        nargs="+",
+        default=["json"],
+        help="Formato(s) de saída: json csv bibtex (default: json)",
     )
-    parser.add_argument("-o", "--output", help="Arquivo de saída")
+    parser.add_argument("-o", "--output", help="Nome base do arquivo de saída, sem extensão")
     parser.add_argument(
         "--delay",
         type=float,
@@ -122,19 +132,19 @@ def main(args: Sequence[str] | None = None) -> int:
         else:
             logger.info("PDFs baixados: %s", len(downloaded))
 
-    output_path = opts.output or f"ojs_scrape_output.{opts.output_format}"
-    _export(articles, output_path, opts.output_format)
+    output_paths = _export_outputs(articles, opts.output, opts.output_formats)
     exported_count = _active_article_count(articles)
     deleted_count = len(articles) - exported_count
+    output_label = ", ".join(output_paths)
     if deleted_count:
         logger.info(
-            "Saída: %s (%s artigos exportados; %s registros deletados ignorados)",
-            output_path,
+            "Saídas: %s (%s artigos exportados; %s registros deletados ignorados)",
+            output_label,
             exported_count,
             deleted_count,
         )
     else:
-        logger.info("Saída: %s (%s artigos)", output_path, exported_count)
+        logger.info("Saídas: %s (%s artigos)", output_label, exported_count)
     return 0
 
 
@@ -202,6 +212,32 @@ def _export(articles: Sequence[Article], output_path: str, output_format: str) -
         to_bibtex(articles, output_path)
     else:  # pragma: no cover — protegido por argparse choices
         raise ValueError(f"Formato de saída não suportado: {output_format}")
+
+
+def _export_outputs(
+    articles: Sequence[Article], output_base: str | None, output_formats: Sequence[str]
+) -> list[str]:
+    """Exporta artigos para todos os formatos solicitados."""
+    output_paths = _resolve_output_paths(output_base, output_formats)
+    for output_path, output_format in zip(output_paths, output_formats, strict=True):
+        _export(articles, output_path, output_format)
+    return output_paths
+
+
+def _resolve_output_paths(output_base: str | None, output_formats: Sequence[str]) -> list[str]:
+    """Resolve caminhos de saída a partir de um nome base sem extensão."""
+    base = Path(output_base or "ojs_scrape_output")
+    if base.suffix.lower() in KNOWN_OUTPUT_SUFFIXES:
+        base = base.with_suffix("")
+
+    paths = []
+    for output_format in output_formats:
+        try:
+            extension = OUTPUT_EXTENSIONS[output_format]
+        except KeyError as exc:  # pragma: no cover — protegido por argparse choices
+            raise ValueError(f"Formato de saída não suportado: {output_format}") from exc
+        paths.append(str(base.parent / f"{base.name}{extension}"))
+    return paths
 
 
 def _configure_logging(*, verbose: bool, quiet: bool) -> None:

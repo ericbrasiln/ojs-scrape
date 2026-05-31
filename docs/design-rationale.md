@@ -226,16 +226,11 @@ ojs-scrape https://periodicos.ufba.br/index.php/afroasia \
   --pdf-limit 3 \
   --pdf-dir pdfs_teste/
 
-# Exportar formatos específicos
+# Exportar formatos específicos ou múltiplos formatos
 ojs-scrape https://periodicos.ufba.br/index.php/afroasia \
   --from 2024 \
-  --format csv \
-  -o afro_asia.csv
-
-ojs-scrape https://periodicos.ufba.br/index.php/afroasia \
-  --from 2024 \
-  --format bibtex \
-  -o afro_asia.bib
+  --format json csv bibtex \
+  -o afro_asia
 ```
 
 ## Arquitetura do pipeline

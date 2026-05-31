@@ -168,7 +168,7 @@ ojs-scrape https://periodicos.ufba.br/index.php/afroasia --from 2024 --until 202
 # Salvar JSON
 ojs-scrape https://periodicos.ufba.br/index.php/afroasia \
   --from 2024 --until 2025 \
-  -o afro_asia_2024_2025.json
+  -o afro_asia_2024_2025
 
 # Filtrar por sets/seções OAI-PMH
 ojs-scrape https://periodicos.ufba.br/index.php/afroasia \
@@ -185,10 +185,17 @@ ojs-scrape https://periodicos.ufba.br/index.php/afroasia \
   --from 2024 --until 2025 \
   --author "Puntoni"
 
-# Exportar CSV ou BibTeX
-ojs-scrape <URL> --from 2024 --until 2025 --format csv -o dados.csv
-ojs-scrape <URL> --from 2024 --until 2025 --format bibtex -o dados.bib
+# Exportar mais de um formato ao mesmo tempo
+ojs-scrape <URL> --from 2024 --until 2025 --format json csv bibtex -o dados
+```
 
+`--format` aceita um ou mais formatos: `json`, `csv`, `bibtex`.
+O padrão é apenas `json`.
+
+`-o`/`--output` recebe o nome base do arquivo, sem extensão.
+O pacote adiciona a extensão conforme o formato: `.json`, `.csv` ou `.bib`.
+
+```bash
 # Baixar PDFs junto com metadados
 ojs-scrape <URL> --from 2024 --until 2025 --pdf --pdf-dir pdfs/
 
