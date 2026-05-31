@@ -1,6 +1,25 @@
 # OJS-Scrape
 
+[![PyPI version](https://img.shields.io/pypi/v/ojs-scrape.svg)](https://pypi.org/project/ojs-scrape/)
+[![Python versions](https://img.shields.io/pypi/pyversions/ojs-scrape.svg)](https://pypi.org/project/ojs-scrape/)
+[![License](https://img.shields.io/pypi/l/ojs-scrape.svg)](https://pypi.org/project/ojs-scrape/)
+[![Documentation](https://img.shields.io/badge/docs-ericbrasil.com.br%2Fojs--scrape-blue)](https://ericbrasil.com.br/ojs-scrape/)
+
 Ferramenta CLI e pacote Python para coleta estruturada de dados de periódicos acadêmicos hospedados em OJS (Open Journal Systems).
+
+## Instalação pelo PyPI
+
+O pacote está publicado em:
+
+```text
+https://pypi.org/project/ojs-scrape/
+```
+
+Instalação:
+
+```bash
+pip install ojs-scrape
+```
 
 ## Escopo ético e vínculo institucional
 

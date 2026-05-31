@@ -1,0 +1,46 @@
+{
+  "title": "OJS-Scrape: coleta de metadados de periódicos OJS via OAI-PMH",
+  "upload_type": "software",
+  "description": "<p><strong>OJS-Scrape</strong> é um pacote Python e uma ferramenta de linha de comando para coleta estruturada de metadados de periódicos hospedados em Open Journal Systems (OJS).</p><p>A fonte primária é o protocolo OAI-PMH, com scraping leve usado apenas como complemento para mapear edições, enriquecer metadados e baixar PDFs públicos quando disponíveis.</p><p>A ferramenta é desenvolvida no âmbito das pesquisas do Laboratório de Humanidades Digitais da UFBA (LABHDUFBA), sem fins lucrativos e sem pretensão de acessar dados sigilosos, contornar controles de acesso ou alterar informações nos servidores das instituições.</p>",
+  "creators": [
+    {
+      "name": "Brasil, Eric",
+      "orcid": "0000-0001-5067-8475",
+      "affiliation": "Universidade da Integração Internacional da Lusofonia Afro-Brasileira (UNILAB); Laboratório de Humanidades Digitais da UFBA (LABHDUFBA)"
+    }
+  ],
+  "access_right": "open",
+  "license": "gpl-3.0-only",
+  "language": "por",
+  "keywords": [
+    "Open Journal Systems",
+    "OAI-PMH",
+    "Dublin Core",
+    "metadados acadêmicos",
+    "periódicos científicos",
+    "humanidades digitais",
+    "software de pesquisa",
+    "bibliographic data"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/ericbrasiln/ojs-scrape",
+      "relation": "isSupplementTo",
+      "scheme": "url",
+      "resource_type": "software"
+    },
+    {
+      "identifier": "https://pypi.org/project/ojs-scrape/",
+      "relation": "isSupplementTo",
+      "scheme": "url",
+      "resource_type": "software"
+    },
+    {
+      "identifier": "https://ericbrasil.com.br/ojs-scrape/",
+      "relation": "isDocumentedBy",
+      "scheme": "url",
+      "resource_type": "other"
+    }
+  ],
+  "notes": "Primeira configuração de metadados para arquivamento automático via Zenodo-GitHub. O software está em estágio alpha; resultados de coleta devem ser validados pelo usuário antes de uso acadêmico, institucional ou público."
+}

@@ -10,6 +10,13 @@ O formato segue a lógica de [Keep a Changelog](https://keepachangelog.com/), co
 
 - `--format` agora aceita múltiplos formatos na mesma execução, por exemplo `--format json csv bibtex`.
 - `-o`/`--output` agora é tratado como nome base sem extensão; a CLI gera `.json`, `.csv` ou `.bib` conforme o formato exportado.
+- Metadados `.zenodo.json` para arquivamento automático de releases futuras via Zenodo-GitHub.
+
+### Documented
+
+- Link e badges do pacote no PyPI em destaque no README e na página inicial da documentação.
+- Fluxo de citação com Zenodo: o DOI deve ser copiado do depósito real criado pelo Zenodo após a release, sem DOI manualmente inventado antes do arquivamento.
+- Etapa de conferência do Zenodo no processo de publicação de versão.
 
 ## [0.1.0] - 2026-05-30
 

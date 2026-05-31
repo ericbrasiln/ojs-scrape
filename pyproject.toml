@@ -67,6 +67,7 @@ include = [
     "/CHANGELOG.md",
     "/LICENSE",
     "/CITATION.cff",
+    "/.zenodo.json",
     "/mkdocs.yml",
     "/pyproject.toml",
 ]
